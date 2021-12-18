@@ -1,10 +1,10 @@
--- µ¥ÀÌÅÍº£ÀÌ½º ¾ğ¾î
- -- 1) µ¥ÀÌÅÍ Á¤ÀÇ¾î (DDL, Data Definition Language) : °ü¸®ÀÚ
- -- 2) µ¥ÀÌÅÍ Á¶ÀÛ¾î (DML, Data Manipulation Language) : °³¹ßÀÚ, »ç¿ëÀÚ
- -- 3) µ¥ÀÌÅÍ Á¦¾î¾î (DCL, Data Control Language) : °ü¸®ÀÚ
+-- ë°ì´í„°ë² ì´ìŠ¤ ì–¸ì–´
+ -- 1) ë°ì´í„° ì •ì˜ì–´ (DDL, Data Definition Language) : ê´€ë¦¬ì
+ -- 2) ë°ì´í„° ì¡°ì‘ì–´ (DML, Data Manipulation Language) : ê°œë°œì, ì‚¬ìš©ì
+ -- 3) ë°ì´í„° ì œì–´ì–´ (DCL, Data Control Language) : ê´€ë¦¬ì
  
  
- -- ** µ¥ÀÌÅÍ Á¤ÀÇ¾î (DDL) ½Ç½À : Create, Alter, Rename, Comment, Truncate, Drop
+ -- ** ë°ì´í„° ì •ì˜ì–´ (DDL) ì‹¤ìŠµ : Create, Alter, Rename, Comment, Truncate, Drop
  Create table books (
     no number,
     name varchar2(30));
@@ -15,8 +15,8 @@ desc books;
 
 select * from books;
 
--- Alter : Å×ÀÌºíÀÇ ±¸Á¶¸¦ º¯°æÇÒ ¶§ »ç¿ë
--- ¸í·É¾î´Â ´ë¼Ò¹®ÀÚ ±¸¹®ÀÌ ¾øÀ½
+-- Alter : í…Œì´ë¸”ì˜ êµ¬ì¡°ë¥¼ ë³€ê²½í•  ë•Œ ì‚¬ìš©
+-- ëª…ë ¹ì–´ëŠ” ëŒ€ì†Œë¬¸ì êµ¬ë¬¸ì´ ì—†ìŒ
 
 alter table books
 add (author varchar2(30));
@@ -41,7 +41,7 @@ rename books to t_books;
 select * from tab;
 
 comment on table t_books
-is 'ÃâÆÇ ¼­Àû ¸ñ·Ï';
+is 'ì¶œíŒ ì„œì  ëª©ë¡';
 
 desc user_tab_comments;
 
@@ -57,200 +57,198 @@ drop table t_books;
 
 select * from tab;
 
- -- 2) µ¥ÀÌÅÍ Á¶ÀÛ¾î (DML) ½Ç½À : Select(°Ë»ö), Insert(Ãß°¡), Update(º¯°æ), Delete(Á¦°Å)
+ -- 2) ë°ì´í„° ì¡°ì‘ì–´ (DML) ì‹¤ìŠµ : Select(ê²€ìƒ‰), Insert(ì¶”ê°€), Update(ë³€ê²½), Delete(ì œê±°)
  
-Create table Ä£±¸ (
-    ÀÌ¸§ varchar2(20),
-    ÈŞ´ëÆù varchar2(11),
-    »ıÀÏ date);
+Create table ì¹œêµ¬ (
+    ì´ë¦„ varchar2(20),
+    íœ´ëŒ€í° varchar2(11),
+    ìƒì¼ date);
 
-insert into Ä£±¸
+insert into ì¹œêµ¬
 values('Chris', '01011112222', '2007/08/28');
 
-insert into Ä£±¸(»ıÀÏ, ÈŞ´ëÆù, ÀÌ¸§)
+insert into ì¹œêµ¬(ìƒì¼, íœ´ëŒ€í°, ì´ë¦„)
 values('2010/03/29', null, 'Max');
 
-insert into Ä£±¸(ÀÌ¸§, ÈŞ´ëÆù)
+insert into ì¹œêµ¬(ì´ë¦„, íœ´ëŒ€í°)
 values('Mary', '01022223333');
 
-select * from Ä£±¸;
+select * from ì¹œêµ¬;
 
 commit;
 
-desc Ä£±¸;
+desc ì¹œêµ¬;
 
-update Ä£±¸
-set ÈŞ´ëÆù = '01099999999'
-where ÀÌ¸§ = 'Mary';
+update ì¹œêµ¬
+set íœ´ëŒ€í° = '01099999999'
+where ì´ë¦„ = 'Mary';
 
-select * from Ä£±¸;
+select * from ì¹œêµ¬;
 
 rollback;
 
 delete
-from Ä£±¸
-where ÀÌ¸§ = 'Mary';
+from ì¹œêµ¬
+where ì´ë¦„ = 'Mary';
 
-select * from Ä£±¸;
+select * from ì¹œêµ¬;
 
-select * from Ä£±¸;
+select * from ì¹œêµ¬;
 
 alter session set nls_date_format = 'YYYY/MM/DD';
 
--- ** µ¥ÀÌÅÍÁ¦¾î¾î(DCL) ½Ç½À: Commit(ÀúÀå/º¯°æºÒ°¡), Rollback(ÀÌÀü°è»êÀ¸·Î º¹±¸), Grant(±ÇÇÑºÎ¿©), Revoke(±ÇÇÑÁ¦°Å)
+-- ** ë°ì´í„°ì œì–´ì–´(DCL) ì‹¤ìŠµ: Commit(ì €ì¥/ë³€ê²½ë¶ˆê°€), Rollback(ì´ì „ê³„ì‚°ìœ¼ë¡œ ë³µêµ¬), Grant(ê¶Œí•œë¶€ì—¬), Revoke(ê¶Œí•œì œê±°)
 
 select * from tab;
 
 create table Choi (
-°èÁÂ¹øÈ£ number,
-±İ¾× number
+ê³„ì¢Œë²ˆí˜¸ number,
+ê¸ˆì•¡ number
 );
 
-create table ÁöÇÔ (
-°èÁÂ¹øÈ£ number,
-±İ¾× number
+create table ì§€í•¨ (
+ê³„ì¢Œë²ˆí˜¸ number,
+ê¸ˆì•¡ number
 );
 
 select * from tab;
 
 insert into choi values (1234, 20000);
-insert into ÁöÇÔ values (9999, 5000);
+insert into ì§€í•¨ values (9999, 5000);
 
 select * from choi;
-select * from ÁöÇÔ;
+select * from ì§€í•¨;
 
--- Choi°¡ °èÁÂ 1234¿¡¼­ ÁöÇÔÀÇ °èÁÂ 9999·Î 10,000¿öÀ» ÀÌÃ¼
+-- Choiê°€ ê³„ì¢Œ 1234ì—ì„œ ì§€í•¨ì˜ ê³„ì¢Œ 9999ë¡œ 10,000ì›Œì„ ì´ì²´
 update choi
-set ±İ¾×=±İ¾×-10000
-where °èÁÂ¹øÈ£ = 1234;
+set ê¸ˆì•¡=ê¸ˆì•¡-10000
+where ê³„ì¢Œë²ˆí˜¸ = 1234;
 
-update ÁöÇÔ
-set ±İ¾× = ±İ¾× +10000
-where °èÁÂ¹øÈ£ = 9999;
+update ì§€í•¨
+set ê¸ˆì•¡ = ê¸ˆì•¡ +10000
+where ê³„ì¢Œë²ˆí˜¸ = 9999;
 
 select * from choi;
-select * from ÁöÇÔ;
+select * from ì§€í•¨;
 
 commit;
 
---Choi°¡ °èÁÂ 1234¿¡¼­ ÁöÇÔ °èÁÂ 9999fh 5,000¿ø ÀÌÃ¼
+--Choiê°€ ê³„ì¢Œ 1234ì—ì„œ ì§€í•¨ ê³„ì¢Œ 9999fh 5,000ì› ì´ì²´
 update choi
-set ±İ¾×=±İ¾×-5000
-where °èÁÂ¹øÈ£=1234;
+set ê¸ˆì•¡=ê¸ˆì•¡-5000
+where ê³„ì¢Œë²ˆí˜¸=1234;
 
-update ÁöÇÔ
-set ±İ¾×=±İ¾×+5000
-where °èÁÂ¹øÈ£=9999;
+update ì§€í•¨
+set ê¸ˆì•¡=ê¸ˆì•¡+5000
+where ê³„ì¢Œë²ˆí˜¸=9999;
 
 select * from choi;
-select * from ÁöÇÔ;
+select * from ì§€í•¨;
 
 rollback;
 
--- * Select ÁıÁß¿¬½À -6°¡Áö ÆĞÅÏ
+-- * Select ì§‘ì¤‘ì—°ìŠµ -6ê°€ì§€ íŒ¨í„´
 /*
-    1) select, from ->»ı·«ºÒ°¡
+    1) select, from ->ìƒëµë¶ˆê°€
     2) select, from, where
     3) select, from, group by
     4) select, from, where, group by
     5) select, from, group by, having 
     6) select, from, where, group by, having
 
-    **order by´Â 6°¡Áö ¸ğµç ÆĞÅÏ¿¡ ´Ù »ç¿ëÇÒ ¼ö ÀÖÀ½
+    **order byëŠ” 6ê°€ì§€ ëª¨ë“  íŒ¨í„´ì— ë‹¤ ì‚¬ìš©í•  ìˆ˜ ìˆìŒ
 */
--- ÆĞÅÏ-1) select, from
+-- íŒ¨í„´-1) select, from
 select * from emp; 
 
---(¹®Á¦) ºÎ¼­Å×ÀÌºí(dept)ÀÇ ¸ğµç µ¥ÀÌÅÍ Á¶È¸
+--(ë¬¸ì œ) ë¶€ì„œí…Œì´ë¸”(dept)ì˜ ëª¨ë“  ë°ì´í„° ì¡°íšŒ
 select * from dept;
 
 desc emp;
 select *form emp;
 select ename, sal from emp;
 
--- »ç¿øÅ×ÀÌºí(emp)¿¡¼­ »ç¿ø¹øÈ£, ÀÌ¸§, Á÷¾÷, ±Ş¿©¸¦ Á¶È¸
+-- ì‚¬ì›í…Œì´ë¸”(emp)ì—ì„œ ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ì§ì—…, ê¸‰ì—¬ë¥¼ ì¡°íšŒ
 select empno, ename, job, sal from emp;
 
-select empno, ename, ename, ename, ename, sal, sal --¼Ó¼º
+select empno, ename, ename, ename, ename, sal, sal --ì†ì„±
 from emp;
 
---(¹®Á¦) ±Ş¿©¸¦ 10% ÀÎ»óÇØ¼­ Ãâ·Â (»ç¿ø¹øÈ£, »ç¿øÀÌ¸§, ±Ş¿©, 10%ÀÎ»óµÈ±Ş¿©)
+--(ë¬¸ì œ) ê¸‰ì—¬ë¥¼ 10% ì¸ìƒí•´ì„œ ì¶œë ¥ (ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, ê¸‰ì—¬, 10%ì¸ìƒëœê¸‰ì—¬)
 select empno, ename, sal, sal *1.1 from emp;
 
--- (¹®Á¦) »ç¿øµéÀÇ ¿¬ºÀÀ» Ãâ·Â
-select empno, ename, sal, comm, sal*12+comm as ¿¬ºÀ
-from emp;--°³Ã¼
+-- (ë¬¸ì œ) ì‚¬ì›ë“¤ì˜ ì—°ë´‰ì„ ì¶œë ¥
+select empno, ename, sal, comm, sal*12+comm as ì—°ë´‰
+from emp;--ê°œì²´
 
--- Null °ªÀ¸·Î ÀÎÇÏ¿© °á°ú°ªÀÌ Á¤È®ÇÏÁö ¾ÊÀ½
--- nvl(comm, 0) comm ÄÃ·³¿¡ °ªÀÌ ÀÖÀ¸¸é ±×´ë·Î »ç¿ëÇÏ°í, ¾øÀ¸¸é(=Null°ª)0À» »ç¿ëÇÔ
+-- Null ê°’ìœ¼ë¡œ ì¸í•˜ì—¬ ê²°ê³¼ê°’ì´ ì •í™•í•˜ì§€ ì•ŠìŒ
+-- nvl(comm, 0) comm ì»¬ëŸ¼ì— ê°’ì´ ìˆìœ¼ë©´ ê·¸ëŒ€ë¡œ ì‚¬ìš©í•˜ê³ , ì—†ìœ¼ë©´(=Nullê°’)0ì„ ì‚¬ìš©í•¨
 select empno, ename, sal, comm, sal*12+nvl(comm, 0) from emp;
 
-/* Null °ª Á¤¸®
-1. NullÀº '¾Ë¼ö ¾ø´Â' ¶Ç´Â 'ºñ¾îÀÖ´Â' °ÍÀ» ÀÇ¹Ì
-2. NullÀº 0ÀÌ ¾Æ´Ï°í, ½ºÆäÀÌ½º(°ø¹é)µµ ¾Æ´Ô
-3. Null°ú ¾î¶² °ªÀ» ºñ±³ÇÏ°Å³ª »ê¼ú ¿¬»êÇÏ¸é °á°ú´Â Ç×»ó Null
-4. Null°ú NullÀ» ºñ±³ÇÏ¸é °á°ú´Â Null
+/* Null ê°’ ì •ë¦¬
+1. Nullì€ 'ì•Œìˆ˜ ì—†ëŠ”' ë˜ëŠ” 'ë¹„ì–´ìˆëŠ”' ê²ƒì„ ì˜ë¯¸
+2. Nullì€ 0ì´ ì•„ë‹ˆê³ , ìŠ¤í˜ì´ìŠ¤(ê³µë°±)ë„ ì•„ë‹˜
+3. Nullê³¼ ì–´ë–¤ ê°’ì„ ë¹„êµí•˜ê±°ë‚˜ ì‚°ìˆ  ì—°ì‚°í•˜ë©´ ê²°ê³¼ëŠ” í•­ìƒ Null
+4. Nullê³¼ Nullì„ ë¹„êµí•˜ë©´ ê²°ê³¼ëŠ” Null
 */
 
--- emp Å×ÀÌºí¿¡¼­ commÀ» ¸ø ¹Ş´Â »ç¿øÀÇ »ç¿ø¹øÈ£¿Í ÀÌ¸§, º¸³Ê½º Á¶È¸
+-- emp í…Œì´ë¸”ì—ì„œ commì„ ëª» ë°›ëŠ” ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸ì™€ ì´ë¦„, ë³´ë„ˆìŠ¤ ì¡°íšŒ
 select empno, ename, comm from emp where comm is null;
--- emp Å×ÀÌºí¿¡¼­ commÀ» ¹Ş´Â »ç¿øÀÇ »ç¿ø¹øÈ£¿Í ÀÌ¸§, º¸³Ê½º Á¶È¸
+-- emp í…Œì´ë¸”ì—ì„œ commì„ ë°›ëŠ” ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸ì™€ ì´ë¦„, ë³´ë„ˆìŠ¤ ì¡°íšŒ
 select empno, ename, comm from emp where comm is not null
--- emp Å×ÀÌºí¿¡¼­ »ó»ç°¡ ¾ø´Â Á÷¿øÀÇ »ç¿ø¹øÈ£, »ç¿øÀÌ¸§, mgr ÄÃ·³À» Á¶È¸
+-- emp í…Œì´ë¸”ì—ì„œ ìƒì‚¬ê°€ ì—†ëŠ” ì§ì›ì˜ ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, mgr ì»¬ëŸ¼ì„ ì¡°íšŒ
 select empno, ename, mgr from emp where mgr is null;
--- emp Å×ÀÌºí¿¡¼­ »ó»ç°¡ ÀÖ´Â Á÷¿øÀÇ »ç¿ø¹øÈ£, »ç¿øÀÌ¸§, mgr ÄÃ·³À» Á¶È¸
+-- emp í…Œì´ë¸”ì—ì„œ ìƒì‚¬ê°€ ìˆëŠ” ì§ì›ì˜ ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, mgr ì»¬ëŸ¼ì„ ì¡°íšŒ
 select empno, ename, mgr from emp where mgr is not null;
 
--- emp Å×ÀÌºí¿¡¼­ ±Ş¿©¸¦ Àû°Ô ¹Ş´Â ¼ø(¿À¸§Â÷¼ø: asc)
+-- emp í…Œì´ë¸”ì—ì„œ ê¸‰ì—¬ë¥¼ ì ê²Œ ë°›ëŠ” ìˆœ(ì˜¤ë¦„ì°¨ìˆœ: asc)
 select empno, ename, sal, comm, deptno from emp order by sal asc;
--- emp Å×ÀÌºí¿¡¼­ ±Ş¿©¸¦ ¸¹ÀÌ ¹Ş´Â ¼ø(³»¸²Â÷¼ø: desc)
+-- emp í…Œì´ë¸”ì—ì„œ ê¸‰ì—¬ë¥¼ ë§ì´ ë°›ëŠ” ìˆœ(ë‚´ë¦¼ì°¨ìˆœ: desc)
 select empno, ename, sal, comm, deptno from emp order by sal dec;
 
--- »ç¿øÀÇ ÀÌ¸§À» ¾ËÆÄºª ¼øÀ¸·Î Á¤·Ä(»ç¿ø¹øÈ£, »ç¿øÀÌ¸§, ±Ş¿©)
+-- ì‚¬ì›ì˜ ì´ë¦„ì„ ì•ŒíŒŒë²³ ìˆœìœ¼ë¡œ ì •ë ¬(ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, ê¸‰ì—¬)
 select empno, ename, sal from emp order by ename desc;  
---¿À¸§Â÷¼ø Á¤·ÄÀÏ¶§ asc ¸í·É¾î´Â »ı·«°¡´É/ ³»¸²Â÷¼ø Á¤·ÄÀÏ¶§ desc ¸í·É¾î »ı·«ºÒ°¡
--- »ç¿øÀÇ ÀÌ¸§À» ¾ËÆÄºª ¼øÀ¸·Î Á¤·Ä(»ç¿ø¹øÈ£, »ç¿øÀÌ¸§, ±Ş¿©)
-select empno, ename, sal from emp order by 2 desc; -- ÄÃ·³ ¹øÈ£ »ç¿ë°¡´É
--- »ç¿øÅ×ÀÌºí¿¡¼­ ºÎ¼­¹øÈ£ ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä(»ç¿ø¹øÈ£, »ç¿øÀÌ¸§, ±Ş¿©, ºÎ¼­¹øÈ£)
+--ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì¼ë•Œ asc ëª…ë ¹ì–´ëŠ” ìƒëµê°€ëŠ¥/ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬ì¼ë•Œ desc ëª…ë ¹ì–´ ìƒëµë¶ˆê°€
+-- ì‚¬ì›ì˜ ì´ë¦„ì„ ì•ŒíŒŒë²³ ìˆœìœ¼ë¡œ ì •ë ¬(ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, ê¸‰ì—¬)
+select empno, ename, sal from emp order by 2 desc; -- ì»¬ëŸ¼ ë²ˆí˜¸ ì‚¬ìš©ê°€ëŠ¥
+-- ì‚¬ì›í…Œì´ë¸”ì—ì„œ ë¶€ì„œë²ˆí˜¸ ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬(ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, ê¸‰ì—¬, ë¶€ì„œë²ˆí˜¸)
 select empno, ename, sal, deptno from emp order by deptno asc, sal desc;
 
-select empno, ename, sal, comm, deptno from emp order by comm desc; --³»¸²Â÷¼ø(desc)Á¤·ÄÀÏ‹š´Â Null°ªÀ» ¸ÕÀú Ãâ·ÂÇÔ
-select empno, ename, sal, comm, deptno from emp order by comm asc; --¿À¸§Â÷¼ø(desc)Á¤·ÄÀÏ‹š´Â Null°ªÀ» µÚ¿¡ Ãâ·ÂÇÔ
--- ¿À¸§Â÷¼ø Á¤·Ä¿¡ Null°ªÀ» ¸ÕÀú Ãâ·ÂÇÏ±â
+select empno, ename, sal, comm, deptno from emp order by comm desc; --ë‚´ë¦¼ì°¨ìˆœ(desc)ì •ë ¬ì¼Â‹ÂšëŠ” Nullê°’ì„ ë¨¼ì € ì¶œë ¥í•¨
+select empno, ename, sal, comm, deptno from emp order by comm asc; --ì˜¤ë¦„ì°¨ìˆœ(desc)ì •ë ¬ì¼Â‹ÂšëŠ” Nullê°’ì„ ë’¤ì— ì¶œë ¥í•¨
+-- ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì— Nullê°’ì„ ë¨¼ì € ì¶œë ¥í•˜ê¸°
 select empno, ename, sal, comm, deptno from emp order by comm nulls first;
--- ³»¸²Â÷¼ø Á¤·Ä¿¡ Null°ª µÚ¿¡ Ãâ·Â
+-- ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬ì— Nullê°’ ë’¤ì— ì¶œë ¥
 select empno, ename, sal, comm, deptno from emp order by comm nulls last;
 
--- selectÀı¿¡ ¾ø´Â ÄÃ·³À» ÀÌ¿ëÇØ¼­ Á¤·ÄÇÒ ¼ö ÀÖÀ½: Æ¯Á¤ ÄÃ·³ÀÇ µ¥ÀÌÅÍ¸¦ ³ëÇ®ÇÏÁö ¾ÊÀ¸¸é¼­µµ ¿øÇÏ´Â Á¤·ÄÀ» ¼öÇÛÇÒ ¼ö ÀÖÀ½
+-- selectì ˆì— ì—†ëŠ” ì»¬ëŸ¼ì„ ì´ìš©í•´ì„œ ì •ë ¬í•  ìˆ˜ ìˆìŒ: íŠ¹ì • ì»¬ëŸ¼ì˜ ë°ì´í„°ë¥¼ ë…¸í’€í•˜ì§€ ì•Šìœ¼ë©´ì„œë„ ì›í•˜ëŠ” ì •ë ¬ì„ ìˆ˜í•¼í•  ìˆ˜ ìˆìŒ
 select empno, ename, job from emp order by sal desc;
--- Á¤·ÄÀÇ ±âÁØ¿¡ µÎ °³ ÀÌ»óÀÌ¸é, order by Àı¿¡ µÎ °³ ÀÌ»óÀÇ ÄÃ·³À» ³ª¿­
--- ºÎ¼­¹øÈ£¸¦ ±âÁØÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä 1Â÷, °°Àº ºÎ¼­´Â ±İ¿©¸¦ ±âÁØÀ¸·Î ³»¸²Â÷¼ø Á¤·Ä 2Â÷
-select deptno, empno, ename, sal, comm from emp order by deptno asc, sal desc; --2Â÷ Á¤·Ä
+-- ì •ë ¬ì˜ ê¸°ì¤€ì— ë‘ ê°œ ì´ìƒì´ë©´, order by ì ˆì— ë‘ ê°œ ì´ìƒì˜ ì»¬ëŸ¼ì„ ë‚˜ì—´
+-- ë¶€ì„œë²ˆí˜¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ 1ì°¨, ê°™ì€ ë¶€ì„œëŠ” ê¸ˆì—¬ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬ 2ì°¨
+select deptno, empno, ename, sal, comm from emp order by deptno asc, sal desc; --2ì°¨ ì •ë ¬
 
--- alias(=º°¸í)¸¦ ÀÌ¿ëÇØ¼­ ÄÃ·³¸íÀ» º¯°æ
-select empno as »ç¿ø¹øÈ£, ename "»ç¿ø ÀÌ¸§", sal ±Ş¿© from emp; -- as´Â »ı·« °¡´É
+-- alias(=ë³„ëª…)ë¥¼ ì´ìš©í•´ì„œ ì»¬ëŸ¼ëª…ì„ ë³€ê²½
+select empno as ì‚¬ì›ë²ˆí˜¸, ename "ì‚¬ì› ì´ë¦„", sal ê¸‰ì—¬ from emp; -- asëŠ” ìƒëµ ê°€ëŠ¥
 
 select ename, sal 
-from emp -- ½ÇÇà¼ø¼­ 1
-where ename= 'ALLEN'; -- ½ÇÇà¼ø¼­ 2
+from emp -- ì‹¤í–‰ìˆœì„œ 1
+where ename= 'ALLEN'; -- ì‹¤í–‰ìˆœì„œ 2
 
--- (¹®Á¦) empÅ×ÀÌºí¿¡¼­ ¸ğµç Á÷¾÷À» Ãâ·ÂÇÏ½Ã¿À.
--- disticnt¸¦ ÀÌ¿ëÇØ¼­ Áßº¹µÈ °ªÀ» Á¦°Å/ order by¿Í distinct¸¦ ÇÔ²² »ç¿ëÇÏ¸é µ¥ÀÌÅÍ ÆÄ¾ÇÀÌ ´õ¿í ½¬¿öÁü
+-- (ë¬¸ì œ) empí…Œì´ë¸”ì—ì„œ ëª¨ë“  ì§ì—…ì„ ì¶œë ¥í•˜ì‹œì˜¤.
+-- disticntë¥¼ ì´ìš©í•´ì„œ ì¤‘ë³µëœ ê°’ì„ ì œê±°/ order byì™€ distinctë¥¼ í•¨ê»˜ ì‚¬ìš©í•˜ë©´ ë°ì´í„° íŒŒì•…ì´ ë”ìš± ì‰¬ì›Œì§
 select distinct job from emp;
 select distinct job from emp order by job asc;
 
 select deptno, job from emp order by 1, 2;
--- distinct »ç¿ë ÈÄ
+-- distinct ì‚¬ìš© í›„
 select distinct deptno, job from emp order by 1, 2;
 
--- ¹®ÀÚ ¸®ÅÍ·²Àº ÀÛÀº µû¿ÈÇ¥('')·Î °¨½Î¾ßµÊ
-select ename, '»ç¿øÀÇ ¾÷¹«´Â ', job, 'ÀÔ´Ï´Ù.' from emp; -- °á°ú°ª °É·³ 4°³
-select ename || ' »ç¿øÀÇ ¾÷¹«´Â ' || job || ' ÀÔ´Ï´Ù.' as »ç¿ø from emp; -- ¹®ÀÚ ¿¬°áÀÚ-ÄÃ·³ 1°³/¿À¶óÅ¬À» Á¦¿ÜÇÑ ´Ù¸¥ DBMS¿¡¼­´Â ¹®ÀÚ¿­°áÀÚ·Î |±âÈ£, ¿À¶óÅ¬¿¡¼­´Â || ±âÈ£¸¦ »ç¿ëÇÔ
+-- ë¬¸ì ë¦¬í„°ëŸ´ì€ ì‘ì€ ë”°ì˜´í‘œ('')ë¡œ ê°ì‹¸ì•¼ë¨
+select ename, 'ì‚¬ì›ì˜ ì—…ë¬´ëŠ” ', job, 'ì…ë‹ˆë‹¤.' from emp; -- ê²°ê³¼ê°’ ê±¸ëŸ¼ 4ê°œ
+select ename || ' ì‚¬ì›ì˜ ì—…ë¬´ëŠ” ' || job || ' ì…ë‹ˆë‹¤.' as ì‚¬ì› from emp; -- ë¬¸ì ì—°ê²°ì-ì»¬ëŸ¼ 1ê°œ/ì˜¤ë¼í´ì„ ì œì™¸í•œ ë‹¤ë¥¸ DBMSì—ì„œëŠ” ë¬¸ìì—´ê²°ìë¡œ |ê¸°í˜¸, ì˜¤ë¼í´ì—ì„œëŠ” || ê¸°í˜¸ë¥¼ ì‚¬ìš©í•¨
 
--- (Ãâ·Â ¿¹)SNITR »ç¿øÀÇ ÀÔ»çÀÏÀº 1981-11-12 ÀÔ´Ï´Ù.
-select ename || ' »ç¿øÀÇ ÀÔ»çÀÏÀº ' || hiredate || ' ÀÔ´Ï´Ù.' as ÀÔ»çÀÏ from emp;
-
-
+-- (ì¶œë ¥ ì˜ˆ)SNITR ì‚¬ì›ì˜ ì…ì‚¬ì¼ì€ 1981-11-12 ì…ë‹ˆë‹¤.
+select ename || ' ì‚¬ì›ì˜ ì…ì‚¬ì¼ì€ ' || hiredate || ' ì…ë‹ˆë‹¤.' as ì…ì‚¬ì¼ from emp;
 
 
 
@@ -259,63 +257,65 @@ select ename || ' »ç¿øÀÇ ÀÔ»çÀÏÀº ' || hiredate || ' ÀÔ´Ï´Ù.' as ÀÔ»çÀÏ from emp
 
 
 
--- ÆĞÅÏ #2(select, from, where) ->¼öÇàÆò°¡2
+
+
+-- íŒ¨í„´ #2(select, from, where) ->ìˆ˜í–‰í‰ê°€2
 select * from emp;
--- 30¹ø ºÎ¼­ÀÎ »ç¿øµéÀÇ ¸ğµç Á¤º¸¸¦ Á¶È¸
+-- 30ë²ˆ ë¶€ì„œì¸ ì‚¬ì›ë“¤ì˜ ëª¨ë“  ì •ë³´ë¥¼ ì¡°íšŒ
 select * from emp where deptno = 30;
 
--- ±Ş¿©¸¦ 1500 ¿¹»ê ¹Ş´Â »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿© Á¤º¸ Á¶È¸
-select ename, sal        --½ÇÇà¼ø¼­ 3
-from emp                 --½ÇÇà¼ø¼­ 1
-where sal >= 1500;       -- ½ÇÇà¼ø¼­2 /whereÀº ¼±ÅÃ¿¬»ê- Æ©ÇÃÀ» ±¸ÇÔ
+-- ê¸‰ì—¬ë¥¼ 1500 ì˜ˆì‚° ë°›ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ ì •ë³´ ì¡°íšŒ
+select ename, sal        --ì‹¤í–‰ìˆœì„œ 3
+from emp                 --ì‹¤í–‰ìˆœì„œ 1
+where sal >= 1500;       -- ì‹¤í–‰ìˆœì„œ2 /whereì€ ì„ íƒì—°ì‚°- íŠœí”Œì„ êµ¬í•¨
 
--- º¸³Ê½º¸¦ ¹ŞÁö ¾Ê´Â È¸¿øÀÌ¸§°ú ±Ş¿© Á¶È¸/ nullÀº ¿¬»êÀÌ ¼º¸³ ¾ÈµÊ
-select ename, sal from emp where comm is null;   -- comm = null -> nullÀÓÀ¸·Î Ãâ·Â°ªÀÌ ¾øÀ½
+-- ë³´ë„ˆìŠ¤ë¥¼ ë°›ì§€ ì•ŠëŠ” íšŒì›ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ/ nullì€ ì—°ì‚°ì´ ì„±ë¦½ ì•ˆë¨
+select ename, sal from emp where comm is null;   -- comm = null -> nullì„ìœ¼ë¡œ ì¶œë ¥ê°’ì´ ì—†ìŒ
 
--- º¸³Ê½º¸¦ ¹Ş´Â È¸¿øÀÌ¸§°ú ±Ş¿© Á¶È¸
+-- ë³´ë„ˆìŠ¤ë¥¼ ë°›ëŠ” íšŒì›ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
 select ename, sal from emp where comm is not null;
 
-select * from emp where empno = empno;  -- Ç×»ó °á°ú°ªÀÌ trueÀÌ¹Ç·Î ¸ğµç Æ©ÇÃÀÌ Ãâ·Â
+select * from emp where empno = empno;  -- í•­ìƒ ê²°ê³¼ê°’ì´ trueì´ë¯€ë¡œ ëª¨ë“  íŠœí”Œì´ ì¶œë ¥
  
-select * from emp where comm = comm;  -- commÀÌ null°ªÀÌ ¾Æ´Ñ Æ©ÇÃµéÀÌ Ãâ·Â
+select * from emp where comm = comm;  -- commì´ nullê°’ì´ ì•„ë‹Œ íŠœí”Œë“¤ì´ ì¶œë ¥
 
--- Á÷¾÷ÀÌ 'salesman'ÀÌ°í ±Ş¿©°¡ 1500 ÀÌ»óÀÎ »ç¿øµéÀÇ ¸ğµç Á¤º¸ Á¶È¸/ '~': ´ë¼Ò¹®ÀÚ ±¸ºĞÇÏ±â
-select * from emp where job = 'SALESMAN' and sal >= 1500;   -- ¸í·É¾î´Â ´ë¼Ò¹®ÀÚ ±¸ºĞÇÏÁö ¾ÊÀ½/¹®ÀÚ¿­Àº ´ë¼ÒºĞÀÚ ±¸ºĞÇÔ 
+-- ì§ì—…ì´ 'salesman'ì´ê³  ê¸‰ì—¬ê°€ 1500 ì´ìƒì¸ ì‚¬ì›ë“¤ì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ/ '~': ëŒ€ì†Œë¬¸ì êµ¬ë¶„í•˜ê¸°
+select * from emp where job = 'SALESMAN' and sal >= 1500;   -- ëª…ë ¹ì–´ëŠ” ëŒ€ì†Œë¬¸ì êµ¬ë¶„í•˜ì§€ ì•ŠìŒ/ë¬¸ìì—´ì€ ëŒ€ì†Œë¶„ì êµ¬ë¶„í•¨ 
 select * from emp where job = 'SALESMAN' or sal >= 1500;
 
-select * from emp where deptno = 30 and comm = null;   -- ¿¬»êÀÇ °á°ú°ªÀÌ nullÀÌ¹Ç·Î Ãâ·Â°ªÀº ¾øÀ½
-select * from emp where deptno = 30 or comm = null;   -- ºÎ¼­¹øÈ£°¡ 30ÀÎ »ç¿ø¸¸ Ãâ·ÂµÊ
+select * from emp where deptno = 30 and comm = null;   -- ì—°ì‚°ì˜ ê²°ê³¼ê°’ì´ nullì´ë¯€ë¡œ ì¶œë ¥ê°’ì€ ì—†ìŒ
+select * from emp where deptno = 30 or comm = null;   -- ë¶€ì„œë²ˆí˜¸ê°€ 30ì¸ ì‚¬ì›ë§Œ ì¶œë ¥ë¨
 select * from emp where deptno = 30 and comm is null;
 
--- ±Ş¿©°¡ 1500 ÀÌ»ó ÀÌ°Å³ª Á÷¾÷ÀÌ 'salesman'ÀÌ¸é¼­ ºÎ¼­¹øÈ£°¡ 20ÀÎ »ç¿øÀÇ ¸ğµç Á¤º¸ Á¶È¸
-select * from emp where sal >= 1500 or (job = 'SALESMAN' and empno = 20);  -- and Á¶°ÇÀÌ or Á¶°Çº¸´Ù ¸ÕÀú ½ÇÇàµÊ
-select * from emp where (sal >= 1500 or job = 'SALESMAN') and empno = 20;  -- ()¸¦ ÀÌ¿ëÇÏ¿© ¿ì¼±¼øÀ§ º¯°æ
+-- ê¸‰ì—¬ê°€ 1500 ì´ìƒ ì´ê±°ë‚˜ ì§ì—…ì´ 'salesman'ì´ë©´ì„œ ë¶€ì„œë²ˆí˜¸ê°€ 20ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ
+select * from emp where sal >= 1500 or (job = 'SALESMAN' and empno = 20);  -- and ì¡°ê±´ì´ or ì¡°ê±´ë³´ë‹¤ ë¨¼ì € ì‹¤í–‰ë¨
+select * from emp where (sal >= 1500 or job = 'SALESMAN') and empno = 20;  -- ()ë¥¼ ì´ìš©í•˜ì—¬ ìš°ì„ ìˆœìœ„ ë³€ê²½
 
 
-select * from emp where 1= 2; --¸ğµç °á°ú°ªÀÌ falas ÀÌ¹Ç·Î Ãâ·ÂµÇ´Â °ªÀÌ ¾øÀ½
+select * from emp where 1= 2; --ëª¨ë“  ê²°ê³¼ê°’ì´ falas ì´ë¯€ë¡œ ì¶œë ¥ë˜ëŠ” ê°’ì´ ì—†ìŒ
 
-select * from emp where 120 > 119; -- ¸ğµç °á°ú°ªÀÌ true ÀÌ¹Ç·Î ¸ğµç ÀüÃ¼ ·¹ÄÚµå°¡ Ãâ·ÂµÊ
+select * from emp where 120 > 119; -- ëª¨ë“  ê²°ê³¼ê°’ì´ true ì´ë¯€ë¡œ ëª¨ë“  ì „ì²´ ë ˆì½”ë“œê°€ ì¶œë ¥ë¨
 
-select * from emp where '120' > '21'; --¹®ÀÚ¿­Àº ¾ÕÀÚ¸®ºÎÅÍ ºñ±³, °á°ú°ªÀÌ false ÀÌ¹Ç·Î Ãâ·Â°ª ¾øÀ½
+select * from emp where '120' > '21'; --ë¬¸ìì—´ì€ ì•ìë¦¬ë¶€í„° ë¹„êµ, ê²°ê³¼ê°’ì´ false ì´ë¯€ë¡œ ì¶œë ¥ê°’ ì—†ìŒ
 
-select * from emp where to_number('120') > to_number('21'); --Ç×»ó °á°ú°ªÀÌ trueÀÌ¹Ç·Î ¸ğµç ·¹ÄÚµå Ãâ·Â
---to_number: ¹®ÀÚ¿­À» ¼ıÀÚ·Î ¹Ù²ãÁÜ
+select * from emp where to_number('120') > to_number('21'); --í•­ìƒ ê²°ê³¼ê°’ì´ trueì´ë¯€ë¡œ ëª¨ë“  ë ˆì½”ë“œ ì¶œë ¥
+--to_number: ë¬¸ìì—´ì„ ìˆ«ìë¡œ ë°”ê¿”ì¤Œ
 
 select * from tab;
 
-create table emp1 as select * from emp; -- emp ³»¿ë º¹»ç
+create table emp1 as select * from emp; -- emp ë‚´ìš© ë³µì‚¬
 
 select * from emp1;
 
 desc emp1;
 
 create table emp2 as select * from emp where 1 = 2;
-empÅ×ÀÌºí°ú °°Àº Å×ÀÌºíÀ» ¸¸µé¸é¼­ ·¹ÄÚµå(³»¿ë)Àº ¾Èµé¾î°¨/ ¼Ó¼º¸¸ º¹»ç
+empí…Œì´ë¸”ê³¼ ê°™ì€ í…Œì´ë¸”ì„ ë§Œë“¤ë©´ì„œ ë ˆì½”ë“œ(ë‚´ìš©)ì€ ì•ˆë“¤ì–´ê°/ ì†ì„±ë§Œ ë³µì‚¬
 
 select * from emp2;
 
 select job from emp;
-select distinct job from emp; --Áßº¹µÈ °ª Á¦°Å(distinct, unique)
+select distinct job from emp; --ì¤‘ë³µëœ ê°’ ì œê±°(distinct, unique)
 select unique job from emp;
 
 select unique deptno from emp;
@@ -323,29 +323,29 @@ select unique deptno from emp;
 select deptno, job from emp;
 select distinct deptno, job from emp;
 
---salesmanÀÎ ¸ğµç »ç¿øÀÇ Á¤º¸ Á¶È¸
+--salesmanì¸ ëª¨ë“  ì‚¬ì›ì˜ ì •ë³´ ì¡°íšŒ
 select * from emp where job = 'SALESMAN';
---salesmanÀÌ ¾Æ´Ñ ¸ğµç »ç¿øÀÇ Á¤º¸ Á¶È¸
+--salesmanì´ ì•„ë‹Œ ëª¨ë“  ì‚¬ì›ì˜ ì •ë³´ ì¡°íšŒ
 select * from emp where job != 'SALESMAN';
 select * from emp where job <> 'SALESMAN';
 select * from emp where job ^= 'SALESMAN';
--- ºÎÁ¤À» ÀÇ¹Ì: !=, <>, ^=
---±Ş¿©¸¦ 2500 º¸´Ù ¸¹ÀÌ ¹Ş´Â »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿© Á¶È¸
-select ename, sal from emp where sal > 2500    -- 2500 ÃÊ°ú
-select ename, sal from emp where sal >= 2500;  -- 2500 ÀÌ»ó
-select ename, sal from emp where sal < 2500;   -- 2500 ¹Ì¸¸
-select ename, sal from emp where sal <= 2500;  -- 2500 ÀÌÇÏ
+-- ë¶€ì •ì„ ì˜ë¯¸: !=, <>, ^=
+--ê¸‰ì—¬ë¥¼ 2500 ë³´ë‹¤ ë§ì´ ë°›ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
+select ename, sal from emp where sal > 2500    -- 2500 ì´ˆê³¼
+select ename, sal from emp where sal >= 2500;  -- 2500 ì´ìƒ
+select ename, sal from emp where sal < 2500;   -- 2500 ë¯¸ë§Œ
+select ename, sal from emp where sal <= 2500;  -- 2500 ì´í•˜
 
--- ÀÌ¸§ÀÌ MÀ¸·Î ½ÃÀÛÇÏ´Â ¸ğµç »ç¿øÀÇ ÀÌ¸§, ±Ş¿©, ÀÔ»çÀÏÀÚ, ºÎ¼­¹øÈ£ Á¶È¸
--- like ¿¬»êÀÚ¸¦ »ç¿ë: ¿ÍÀÏµå Ä«µå(%: zero or more, _:one)
-select ename, sal, hiredate, deptno from emp where ename like 'M%'; -- MÀ¸·Î ½ÃÀÛÇÏ´Â ¸ğµç ÀÌ¸§ÀÌ ³ª¿È
--- ÀÌ¸§ÀÇ ³¡ÀÌ NÀ¸·Î ³¡³ª´Â »ç¿øÀÇ ÀÌ¸§, ±Ş¿© Á¶È¸
+-- ì´ë¦„ì´ Mìœ¼ë¡œ ì‹œì‘í•˜ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„, ê¸‰ì—¬, ì…ì‚¬ì¼ì, ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
+-- like ì—°ì‚°ìë¥¼ ì‚¬ìš©: ì™€ì¼ë“œ ì¹´ë“œ(%: zero or more, _:one)
+select ename, sal, hiredate, deptno from emp where ename like 'M%'; -- Mìœ¼ë¡œ ì‹œì‘í•˜ëŠ” ëª¨ë“  ì´ë¦„ì´ ë‚˜ì˜´
+-- ì´ë¦„ì˜ ëì´ Nìœ¼ë¡œ ëë‚˜ëŠ” ì‚¬ì›ì˜ ì´ë¦„, ê¸‰ì—¬ ì¡°íšŒ
 select ename, sal from emp where ename like '%N';  
--- ÀÌ¸§ÀÌ 5±ÛÂ¥ÀÎ »ç¿øÀÇ ¸ğµç Á¤º¸ Á¶È¸
+-- ì´ë¦„ì´ 5ê¸€ì§œì¸ ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ
 select * from emp where ename like '_____';
--- ÀÌ¸§ÀÇ µÎ¹øÂ° ±ÛÀÚ°¡ AÀÎ »ç¿ùÀÇ ÀÌ¸§ Á¶È¸
+-- ì´ë¦„ì˜ ë‘ë²ˆì§¸ ê¸€ìê°€ Aì¸ ì‚¬ì›”ì˜ ì´ë¦„ ì¡°íšŒ
 select ename from emp where ename like '_A%';
--- ÀÌ¸§¿¡ S°¡ µé¾î°¡´Â »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿©¿Í ºÎ¼­¹øÈ£ Á¶È¸
+-- ì´ë¦„ì— Sê°€ ë“¤ì–´ê°€ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ì™€ ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
 select ename, sal, deptno from emp where ename like '%S%'; 
 
 
@@ -362,33 +362,33 @@ insert into t1 values('POA_AP');
 
 select * from t1;
 
--- A_A ºÎºĞ ¹®ÀÚ¿­ÀÌ Æ÷ÇÔµÈ ¼Ó¼º°ª
+-- A_A ë¶€ë¶„ ë¬¸ìì—´ì´ í¬í•¨ëœ ì†ì„±ê°’
 --select * from t1 where coll like '%A_A%';
--- ¼Ó¼º°ª¿¡ '_'°¡ µé¾îÀÖ´Â °ªÀ» Ãâ·Â
+-- ì†ì„±ê°’ì— '_'ê°€ ë“¤ì–´ìˆëŠ” ê°’ì„ ì¶œë ¥
 --select * from t1 where coll like '%$_%' escape '$';
--- º¸³Ê½º(comm)¸¦ ¹ŞÁö ¾Ê´Â »ç¿øÀÇ ¸ğµç Á¤º¸ Ãâ·Â
+-- ë³´ë„ˆìŠ¤(comm)ë¥¼ ë°›ì§€ ì•ŠëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¶œë ¥
 select * from emp where comm is null;
---º¸³Ê½º(comm)¸¦ ¹Ş´Â »ç¿øÀÇ ¸ğµç Á¤º¸ Ãâ·Â
+--ë³´ë„ˆìŠ¤(comm)ë¥¼ ë°›ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¶œë ¥
 select * from emp where com is not null;
 select * from emp where com >= 0;
 
--- »ó»ç°¡ ¾ø´Â »ç¿øÀÇ ¸ğµç Á¤º¸ Ãâ·Â
+-- ìƒì‚¬ê°€ ì—†ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¶œë ¥
 select * from emp where mgr is null;
 select * from emp where not(mgr is null);
 
--- »ó»ç°¡ ÀÖ´Â »ç¿øÀÇ ¸ğµç Á¤º¸ Ãâ·Â
+-- ìƒì‚¬ê°€ ìˆëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¶œë ¥
 select * from emp where mgr is not null;
 
---±Ş¿©(sal)°¡ 1500ÀÌ»ó 3000ÀÌÇÏ ¹Ş´Â »ç¿øÀÇ ¸ğµç Á¤º¸ Ãâ·Â
+--ê¸‰ì—¬(sal)ê°€ 1500ì´ìƒ 3000ì´í•˜ ë°›ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¶œë ¥
 select * from emp where sal >=1500 and sal <= 3000;
 select * from emp where sal between 1500 and 3000;
 
--- ±Ş¿© 1500º¸´Ù Àû°Ô ¹Ş°Å³ª ¶Ç´Â 3000º¸´Ù ¸¹ÀÌ ¹Ş´Â »ç¿øÀÇ ¸ğµç Á¤º¸
+-- ê¸‰ì—¬ 1500ë³´ë‹¤ ì ê²Œ ë°›ê±°ë‚˜ ë˜ëŠ” 3000ë³´ë‹¤ ë§ì´ ë°›ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´
 select * from emp where sal < 1500 or sal > 3000;
 select * from emp where sal not between 1500 and 3000;
 
 select distinct job from emp;
-select ename as »ç¿øÀÌ¸§, job as Á÷¾÷, sal * 12 + nvl(comm, 0) as ¿¬ºÀ from emp;
+select ename as ì‚¬ì›ì´ë¦„, job as ì§ì—…, sal * 12 + nvl(comm, 0) as ì—°ë´‰ from emp;
 
 drop table t1_history;
 create table t1_history(
@@ -414,68 +414,68 @@ where '20060321' >= begin_date and '20060321' <= end_date;
 
 select * from t1_hhistory where '2009087' between begin_date and end_date;
 
--- »ç¿ø Å×ÀÌºíÀÇ ¸ğµç »ç¿øÀÇ ¸ğµç Á¤º¸¸¦ Á¶È¸
+-- ì‚¬ì› í…Œì´ë¸”ì˜ ëª¨ë“  ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ë¥¼ ì¡°íšŒ
 select * from emp;
 
--- 10¹ø ºÎ¼­¿¡ ±Ù¹«ÇÏ°í ÀÖ´Â »ç¿øÀÇ »ç¿ø¹øÈ£, ÀÌ¸§, ºÎ¼­ ¹øÈ£ Á¶È¸
+-- 10ë²ˆ ë¶€ì„œì— ê·¼ë¬´í•˜ê³  ìˆëŠ” ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ë¶€ì„œ ë²ˆí˜¸ ì¡°íšŒ
 select empno, ename, from emp where deptno = 10;
--- 20¹ø ºÎ¼­¿¡ ±Ù¹«ÇÏ°í ÀÖ´Â »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿©¿Í º¸³Ê½º Á¶È¸
+-- 20ë²ˆ ë¶€ì„œì— ê·¼ë¬´í•˜ê³  ìˆëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ì™€ ë³´ë„ˆìŠ¤ ì¡°íšŒ
 select ename, sal, comm from emp where deptno = 20;
 
--- »ç¿øÅ×ÀÌºí¿¡¼­ 10¹ø ºÎ¼­ ¶Ç´Â 30¹ø ºÎ¼­¿¡ ±Ù¹«ÇÏ´Â Á÷¿øÀÇ ¸ğµç Á¤º¸¸¦ Á¶È¸
--- or ¿¬»êÀÚ »ç¿ë
+-- ì‚¬ì›í…Œì´ë¸”ì—ì„œ 10ë²ˆ ë¶€ì„œ ë˜ëŠ” 30ë²ˆ ë¶€ì„œì— ê·¼ë¬´í•˜ëŠ” ì§ì›ì˜ ëª¨ë“  ì •ë³´ë¥¼ ì¡°íšŒ
+-- or ì—°ì‚°ì ì‚¬ìš©
 select * from emp where deptno = 10 or deptno = 30;
--- in ¿¬»êÀÚ
+-- in ì—°ì‚°ì
 select * from emp where deptno in (10, 30);
--- ÇÕÁıÇÕ ¿¬»ê
+-- í•©ì§‘í•© ì—°ì‚°
 select * from emp where deptno = 10
 union all
 select * from emp where deptno = 30;
 
  
--- »ç¿øÅ×ÀÌºí¿¡¼­ James, Allen, ScottÀÇ ÀÌ¸§, ±Ş¿©, ÀÔ»ç³¯Â¥¸¦ Á¶È¸
+-- ì‚¬ì›í…Œì´ë¸”ì—ì„œ James, Allen, Scottì˜ ì´ë¦„, ê¸‰ì—¬, ì…ì‚¬ë‚ ì§œë¥¼ ì¡°íšŒ
 select ename, sal, hiredate from emp where ename = 'JAMES' or ename = 'ALLEN' or ename = 'SCOTT';
--- in ¿¬»êÀÚ
+-- in ì—°ì‚°ì
 select ename, sal, hiredate from emp where ename in ('JAMES', 'ALLEN', 'SCOTT');
 
--- Á÷¾÷ÀÌ 'Salesman'ÀÌ°Å³ª 'Manager'ÀÎ »ç¿øÀÇ ÀÌ¸§, ±Ş¿©, º¸³Ê½º, ºÎ¼­¹øÈ£ Á¶È¸
--- ro ¿¬»êÀÚ
+-- ì§ì—…ì´ 'Salesman'ì´ê±°ë‚˜ 'Manager'ì¸ ì‚¬ì›ì˜ ì´ë¦„, ê¸‰ì—¬, ë³´ë„ˆìŠ¤, ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
+-- ro ì—°ì‚°ì
 select ename, sal, comm, deptno from emp where JOB = 'SALESMAN' or JOB = 'MANAGER';
--- in ¿¬»êÀÚ
+-- in ì—°ì‚°ì
 select ename, sal, comm, deptno from emp where JOB in ('SALESMAN', 'MANAGER');
  
--- ±Ş¿©°¡ 2500 ÃÊ°úÇÏ´Â »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿©¿Í Á÷¾÷ Á¶È¸
+-- ê¸‰ì—¬ê°€ 2500 ì´ˆê³¼í•˜ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ì™€ ì§ì—… ì¡°íšŒ
 select ename, sal, job from emp where sal >= 2500;
 
--- »ç¿ø¹øÈ£°¡ 7566ÀÎ »ç¿øÀÇ »ç¿ø¹øÈ£, ÀÌ¸§, ºÎ¼­¹øÈ£ Á¶È¸
+-- ì‚¬ì›ë²ˆí˜¸ê°€ 7566ì¸ ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
 select empno, ename, deptno from emp where emptno = 7566;
 select * from emp;
 
 select ename, sal from emp order by ename asc;
 
--- »ç¿ø¹øÈ£°¡ 7566ÀÎ »ç¿øÀÇ »ç¿ø¹øÈ£, ÀÌ¸§, ºÎ¼­¹øÈ£¸¦ Á¶È¸
+-- ì‚¬ì›ë²ˆí˜¸ê°€ 7566ì¸ ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ë¶€ì„œë²ˆí˜¸ë¥¼ ì¡°íšŒ
 select empno, ename, deptno from emp where empno = 7566;
--- ±Ş¿©°¡ 1000°ú 3000»çÀÌ°¡ ¾Æ´Ñ »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿©¸¦ Á¶È¸
--- between ¿¬»êÀÚ ÀÌ¿ë
+-- ê¸‰ì—¬ê°€ 1000ê³¼ 3000ì‚¬ì´ê°€ ì•„ë‹Œ ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ë¥¼ ì¡°íšŒ
+-- between ì—°ì‚°ì ì´ìš©
 select ename, sal from emp where sal not between 1000 and 3000;
 select ename, sal from emp where sal < 1000 or sal > 3000;
--- Allen°ú jamesÀÇ »ç¿ø¹øÈ£, Á÷¾÷, ±Ş¿©, ºÎ¼­¹øÈ£ Á¶È¸
--- or¿¬»êÀÚ
+-- Allenê³¼ jamesì˜ ì‚¬ì›ë²ˆí˜¸, ì§ì—…, ê¸‰ì—¬, ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
+-- orì—°ì‚°ì
 select empno, job, sal, deptno from emp where ename = 'ALLEN' or ename = 'JAMES';
--- in ¿¬»êÀÚ
+-- in ì—°ì‚°ì
 select empno, job, sal, deptno from emp where ename in ('ALLEN', 'JAMES');
 select empno, job, sal, deptno from emp where ename = 'ALLEN'
 Union
 select empno, job, sal, deptno from emp where ename = 'JAMES';
 
--- È­¿äÀÏ¿¡ ÀÔ»çÇÑ »ç¿ø »ç¿ø¹øÈ£, ÀÌ¸§, ÀÔ»ç³¯Â¥ DAY(È­¿äÀÏ) Á¶È¸
+-- í™”ìš”ì¼ì— ì…ì‚¬í•œ ì‚¬ì› ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ì…ì‚¬ë‚ ì§œ DAY(í™”ìš”ì¼) ì¡°íšŒ
 -- select empno, ename, hiredate from emp where day = 3;
 select empno, ename, hiredate, to_char(hiredate, 'day') from emp;
-select empno, ename, hiredate from emp where to_char(hiredate, 'day')='È­¿äÀÏ';
+select empno, ename, hiredate from emp where to_char(hiredate, 'day')='í™”ìš”ì¼';
 
 select to_char(to_date('20040829', 'yyyymmdd'), 'day') from dual;
 
--- Á÷¾÷ÀÌ salesmanÀÎ »ç¿øÀÇ ¸ğµç Á¤º¸ Á¶È¸
+-- ì§ì—…ì´ salesmanì¸ ì‚¬ì›ì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ
 select * from emp where job = 'SALESMAN';
 
 
@@ -484,30 +484,30 @@ select * from emp where job = 'SALESMAN';
 
 
 
--- ÆĞÅÏ #3(select, from, group by)
+-- íŒ¨í„´ #3(select, from, group by)
 select * from emp;
--- °¢ ºÎ¼­ÀÇ ¸î ¸íÀÌ ±Ù¹«ÇÏ´ÂÁö Á¶È¸
+-- ê° ë¶€ì„œì˜ ëª‡ ëª…ì´ ê·¼ë¬´í•˜ëŠ”ì§€ ì¡°íšŒ
 select count(*) from emp;
 select deptno, count(*) from emp group by deptno order by deptno;
 
--- °¢ ºÎ¼­ÀÇ ±Ş¿© ÇÕ, Æò±Õ ±¸ÇÏ±â/ °¢ ºÎ¼­º°±Ş¿©ÇÕ, ºÎ¼­º°±Ş¿©Æò±ÕÀ¸·Î ÀÌ¸§ Á¤ÇÏ±â
-select deptno, sum(sal) as ºÎ¼­º°±Ş¿©ÇÕ, avg(sal) as ºÎ¼­º°±Ş¿©Æò±Õ from emp group by deptno order by deptno;
+-- ê° ë¶€ì„œì˜ ê¸‰ì—¬ í•©, í‰ê·  êµ¬í•˜ê¸°/ ê° ë¶€ì„œë³„ê¸‰ì—¬í•©, ë¶€ì„œë³„ê¸‰ì—¬í‰ê· ìœ¼ë¡œ ì´ë¦„ ì •í•˜ê¸°
+select deptno, sum(sal) as ë¶€ì„œë³„ê¸‰ì—¬í•©, avg(sal) as ë¶€ì„œë³„ê¸‰ì—¬í‰ê·  from emp group by deptno order by deptno;
 
--- °¢ ¾÷¹«º° ÃÖ°í±Ş¿© ¹× ÃÖÀú±Ş¿© Á¶È¸
--- select max(sal), min(sal) from emp;-> ¿À·ù ¹ß»ı
-select job, max(sal) ÃÖ°í±Ş¿©, min(sal) ÃÖÀú±Ş¿© from emp group by job;
+-- ê° ì—…ë¬´ë³„ ìµœê³ ê¸‰ì—¬ ë° ìµœì €ê¸‰ì—¬ ì¡°íšŒ
+-- select max(sal), min(sal) from emp;-> ì˜¤ë¥˜ ë°œìƒ
+select job, max(sal) ìµœê³ ê¸‰ì—¬, min(sal) ìµœì €ê¸‰ì—¬ from emp group by job;
 
--- ºÎ¼­º°/¾÷¹«º° »ç¿ø¼ö, ±Ş¿©ÇÕ, ±Ş¿©Æò±Õ Á¶È¸
-select deptno, job, count(*) »ç¿ø¼ö, sum(sal) ±Ş¿©ÇÕ, avg(sal) ±Ş¿©Æò±Õ from emp group by deptno, job order by deptno, job desc;  
+-- ë¶€ì„œë³„/ì—…ë¬´ë³„ ì‚¬ì›ìˆ˜, ê¸‰ì—¬í•©, ê¸‰ì—¬í‰ê·  ì¡°íšŒ
+select deptno, job, count(*) ì‚¬ì›ìˆ˜, sum(sal) ê¸‰ì—¬í•©, avg(sal) ê¸‰ì—¬í‰ê·  from emp group by deptno, job order by deptno, job desc;  
 
--- ºÎ¼­º°/¾÷¹«º° ÃÖÃÊÀÔ»çÀÚ ¹× ¸¶Áö¸· ÀÔ»çÀÚ¸¦ Á¶È¸
+-- ë¶€ì„œë³„/ì—…ë¬´ë³„ ìµœì´ˆì…ì‚¬ì ë° ë§ˆì§€ë§‰ ì…ì‚¬ìë¥¼ ì¡°íšŒ
 select deptno, job, min(hiredate), max(hiredate) from emp group by deptno, job order by 1;
 
--- ÀüÃ¼ »ç¿øµéÀÇ Æò±Õ Æ÷³Ê½º¸¦ Á¶È¸
-select ename, comm, comm + 100, nvl(comm, 0), nvl(comm, 0) + 100 from emp; -- °ªÀÌ ÀÖÀ» ¶© ±×´ë·Î ³Ö°í ,commÀÌ null°ªÀÌ¸é 0À¸·Î Ä¡È¯
-select avg(comm) Æò±Õº¸³Ê½º4¸í, avg(nvl(comm, 0)) ÀüÃ¼»ç¿øÀÇ Æò±Õº¸³Ê½º from emp;
+-- ì „ì²´ ì‚¬ì›ë“¤ì˜ í‰ê·  í¬ë„ˆìŠ¤ë¥¼ ì¡°íšŒ
+select ename, comm, comm + 100, nvl(comm, 0), nvl(comm, 0) + 100 from emp; -- ê°’ì´ ìˆì„ ë• ê·¸ëŒ€ë¡œ ë„£ê³  ,commì´ nullê°’ì´ë©´ 0ìœ¼ë¡œ ì¹˜í™˜
+select avg(comm) í‰ê· ë³´ë„ˆìŠ¤4ëª…, avg(nvl(comm, 0)) ì „ì²´ì‚¬ì›ì˜ í‰ê· ë³´ë„ˆìŠ¤ from emp;
 
--- ºÎ¼­º° »ç¿øµéÀÇ Æò±Õ º¸³Ê½º Á¶È¸
+-- ë¶€ì„œë³„ ì‚¬ì›ë“¤ì˜ í‰ê·  ë³´ë„ˆìŠ¤ ì¡°íšŒ
 select deptno, avg(comm), trunc(avg(nvl(comm, 0))) from emp group by deptno;
 
 
@@ -516,126 +516,126 @@ select deptno, avg(comm), trunc(avg(nvl(comm, 0))) from emp group by deptno;
 
 
 
--- ÆĞÅÏ #4(select, from, where, group by)
--- ½ÇÇà¼ø¼­: from -> where -> group by -> select -> order by
+-- íŒ¨í„´ #4(select, from, where, group by)
+-- ì‹¤í–‰ìˆœì„œ: from -> where -> group by -> select -> order by
 
--- ±Ş¿©°¡ 1000 ÀÌ»óÀÎ »ç¿øµéÀÇ ¾÷¹«º° »ç¿ø¼ö, ºÎ¼­º° ÃÖ´ë±Ş¿©, ºÎ¼­º° ÃÖ¼Ò±Ş¿©¸¦ Á¶È¸
-select job ¾÷¹«, count(*) »ç¿ø¼ö, max(sal) ÃÖ´ë±Ş¿©, min(sal) ÃÖ¼Ò±Ş¿© from emp where sal >= 100 group by job;
+-- ê¸‰ì—¬ê°€ 1000 ì´ìƒì¸ ì‚¬ì›ë“¤ì˜ ì—…ë¬´ë³„ ì‚¬ì›ìˆ˜, ë¶€ì„œë³„ ìµœëŒ€ê¸‰ì—¬, ë¶€ì„œë³„ ìµœì†Œê¸‰ì—¬ë¥¼ ì¡°íšŒ
+select job ì—…ë¬´, count(*) ì‚¬ì›ìˆ˜, max(sal) ìµœëŒ€ê¸‰ì—¬, min(sal) ìµœì†Œê¸‰ì—¬ from emp where sal >= 100 group by job;
 
--- °¢ ºÎ¼­º°·Î ClerkÀº ¸î¸íÀÎ°¡
+-- ê° ë¶€ì„œë³„ë¡œ Clerkì€ ëª‡ëª…ì¸ê°€
 select deptno, count(*) from emp group by deptno order by deptno;
 
 
 
--- ppt 19~20°­ ½Ç½À¿¹Á¦
-create table ¼ö°­ (
-    ÇĞ¹ø char(7) not null,
-    °ú¸ñ¹øÈ£ varchar2(20) not null);
+-- ppt 19~20ê°• ì‹¤ìŠµì˜ˆì œ
+create table ìˆ˜ê°• (
+    í•™ë²ˆ char(7) not null,
+    ê³¼ëª©ë²ˆí˜¸ varchar2(20) not null);
     
-insert into ¼ö°­ values('9902101', 'CS100');    
-insert into ¼ö°­ values('9902101', 'CS200');    
-insert into ¼ö°­ values('9902102', 'CS200');    
-insert into ¼ö°­ values('9902102', 'CS300');    
-insert into ¼ö°­ values('9902103', 'CS400');    
+insert into ìˆ˜ê°• values('9902101', 'CS100');    
+insert into ìˆ˜ê°• values('9902101', 'CS200');    
+insert into ìˆ˜ê°• values('9902102', 'CS200');    
+insert into ìˆ˜ê°• values('9902102', 'CS300');    
+insert into ìˆ˜ê°• values('9902103', 'CS400');    
 
-create table ÇĞ»ı (
-    ÇĞ¹ø char(4) not null,
-    ÇĞ»ı¸í char(10) not null,
-    ÇĞ³â integer);
+create table í•™ìƒ (
+    í•™ë²ˆ char(4) not null,
+    í•™ìƒëª… char(10) not null,
+    í•™ë…„ integer);
 
-insert into ÇĞ»ı values('901', '¹Ú', 2);    
-insert into ÇĞ»ı values('902', 'Á¶', 4);    
-insert into ÇĞ»ı values('903', 'ÃÖ', 3);    
+insert into í•™ìƒ values('901', 'ë°•', 2);    
+insert into í•™ìƒ values('902', 'ì¡°', 4);    
+insert into í•™ìƒ values('903', 'ìµœ', 3);    
    
      
-create table Á¡¼ö (
-    ÇĞ¹ø char(4) not null,
-    ÄÚµå¹øÈ£ char(10) not null,
-    Áß°£°í»ç integer,
-    ±â¸»°í»ç integer);
+create table ì ìˆ˜ (
+    í•™ë²ˆ char(4) not null,
+    ì½”ë“œë²ˆí˜¸ char(10) not null,
+    ì¤‘ê°„ê³ ì‚¬ integer,
+    ê¸°ë§ê³ ì‚¬ integer);
 
-insert into Á¡¼ö values ('901', 'C-101', 80, 95);
-insert into Á¡¼ö values ('901', 'C-102', 75, 85);
-insert into Á¡¼ö values ('902', 'C-101', 90, 80);
-insert into Á¡¼ö values ('902', 'C-102', 95, 75);
-insert into Á¡¼ö values ('902', 'D-103', 60, 90);
-insert into Á¡¼ö values ('903', 'D-103', 65, 70);
+insert into ì ìˆ˜ values ('901', 'C-101', 80, 95);
+insert into ì ìˆ˜ values ('901', 'C-102', 75, 85);
+insert into ì ìˆ˜ values ('902', 'C-101', 90, 80);
+insert into ì ìˆ˜ values ('902', 'C-102', 95, 75);
+insert into ì ìˆ˜ values ('902', 'D-103', 60, 90);
+insert into ì ìˆ˜ values ('903', 'D-103', 65, 70);
 
-create table ÇĞ»ı2 (
-    ÇĞ¹ø char(7) not null,
-    ÀÌ¸§ char(10) not null,
-    ÇĞ°ú¹øÈ£ char(4),
-    ÀÌ¼öÇĞÁ¡ integer,
-    Æò±ÕÆòÁ¡ number(3,2));
+create table í•™ìƒ2 (
+    í•™ë²ˆ char(7) not null,
+    ì´ë¦„ char(10) not null,
+    í•™ê³¼ë²ˆí˜¸ char(4),
+    ì´ìˆ˜í•™ì  integer,
+    í‰ê· í‰ì  number(3,2));
 
-insert into ÇĞ»ı2 values ('9902101', 'È«±æµ¿', '010', 100, 4.10);    
-insert into ÇĞ»ı2 values ('9902102', '¹ÚµÎ¸®', '010', 80, 3.25);    
-insert into ÇĞ»ı2 values ('9902103', '±èµ¹¼è', '020', 90, 3.00);    
-insert into ÇĞ»ı2 values ('9902104', 'ÀÌÇØ¼Ö', '020', 120, 2.60);    
-insert into ÇĞ»ı2 values ('9902105', 'ÀÓÇÏ´Ã', '030', 130, 1.90);   
+insert into í•™ìƒ2 values ('9902101', 'í™ê¸¸ë™', '010', 100, 4.10);    
+insert into í•™ìƒ2 values ('9902102', 'ë°•ë‘ë¦¬', '010', 80, 3.25);    
+insert into í•™ìƒ2 values ('9902103', 'ê¹€ëŒì‡ ', '020', 90, 3.00);    
+insert into í•™ìƒ2 values ('9902104', 'ì´í•´ì†”', '020', 120, 2.60);    
+insert into í•™ìƒ2 values ('9902105', 'ì„í•˜ëŠ˜', '030', 130, 1.90);   
 
 select * from tab;
-select * from ÇĞ»ı2;
+select * from í•™ìƒ2;
 
--- 2¹ø Ã³¸®
-select ÇĞ¹ø from ¼ö°­ where °ú¸ñ¹øÈ£ = 'CS300';
-select ÇĞ¹ø from ¼ö°­ where °ú¸ñ¹øÈ£ = 'CS200' and ÇĞ¹ø = 9902102;
--- ¼­ºêÄõ¸®(1¹ø Ã³¸®)
-select ÇĞ¹ø from ¼ö°­ where °ú¸ñ¹øÈ£ = 'CS200' and ÇĞ¹ø = (select ÇĞ¹ø from ¼ö°­ where °ú¸ñ¹øÈ£ = 'CS300');
+-- 2ë²ˆ ì²˜ë¦¬
+select í•™ë²ˆ from ìˆ˜ê°• where ê³¼ëª©ë²ˆí˜¸ = 'CS300';
+select í•™ë²ˆ from ìˆ˜ê°• where ê³¼ëª©ë²ˆí˜¸ = 'CS200' and í•™ë²ˆ = 9902102;
+-- ì„œë¸Œì¿¼ë¦¬(1ë²ˆ ì²˜ë¦¬)
+select í•™ë²ˆ from ìˆ˜ê°• where ê³¼ëª©ë²ˆí˜¸ = 'CS200' and í•™ë²ˆ = (select í•™ë²ˆ from ìˆ˜ê°• where ê³¼ëª©ë²ˆí˜¸ = 'CS300');
 
--- º¸´Ù ±İ¿©¸¦ ´õ ¸¹ÀÌ ¹Ş´Â »ç¿øÀÇ ÀÌ¸§°ú ±Ş¿© Á¶È¸
+-- ë³´ë‹¤ ê¸ˆì—¬ë¥¼ ë” ë§ì´ ë°›ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
 select sal from emp where ename = 'TURNER';
 select ename, sal from emp where sal > (select sal from emp where ename = 'TURNER');
 
 
-select ÇĞ¹ø from Á¡¼ö where ÄÚµå¹øÈ£ = 'C-102';
-select ÇĞ»ı¸í from ÇĞ»ı where ÇĞ¹ø = '901' or ÇĞ¹ø = '902';
--- ¼­ºê Äõ¸®
-select ÇĞ»ı¸í from ÇĞ»ı where ÇĞ¹ø in (select ÇĞ¹ø from Á¡¼ö where ÄÚµå¹øÈ£ = 'C-102');
+select í•™ë²ˆ from ì ìˆ˜ where ì½”ë“œë²ˆí˜¸ = 'C-102';
+select í•™ìƒëª… from í•™ìƒ where í•™ë²ˆ = '901' or í•™ë²ˆ = '902';
+-- ì„œë¸Œ ì¿¼ë¦¬
+select í•™ìƒëª… from í•™ìƒ where í•™ë²ˆ in (select í•™ë²ˆ from ì ìˆ˜ where ì½”ë“œë²ˆí˜¸ = 'C-102');
 -- join
-select ÇĞ»ı.ÇĞ»ı¸í from ÇĞ»ı, Á¡¼ö where ÇĞ»ı.ÇĞ¹ø = Á¡¼ö.ÇĞ¹ø and Á¡¼ö.ÄÚµå¹øÈ£ ='C-102';
+select í•™ìƒ.í•™ìƒëª… from í•™ìƒ, ì ìˆ˜ where í•™ìƒ.í•™ë²ˆ = ì ìˆ˜.í•™ë²ˆ and ì ìˆ˜.ì½”ë“œë²ˆí˜¸ ='C-102';
 
--- Áß°£°í»ç°¡ 70Á¡ ÀÌÇÏÀÎ ÇĞ»ıÀÇ ÇĞ»ı¸í °Ë»ö
-select ÇĞ¹ø from Á¡¼ö where Áß°£°í»ç <= 70;
-select ÇĞ»ı¸í from ÇĞ»ı where ÇĞ¹ø in(select ÇĞ¹ø from Á¡¼ö where Áß°£°í»ç <= 70);
+-- ì¤‘ê°„ê³ ì‚¬ê°€ 70ì  ì´í•˜ì¸ í•™ìƒì˜ í•™ìƒëª… ê²€ìƒ‰
+select í•™ë²ˆ from ì ìˆ˜ where ì¤‘ê°„ê³ ì‚¬ <= 70;
+select í•™ìƒëª… from í•™ìƒ where í•™ë²ˆ in(select í•™ë²ˆ from ì ìˆ˜ where ì¤‘ê°„ê³ ì‚¬ <= 70);
 
-select ÀÌ¼öÇĞÁ¡ from ÇĞ»ı2 where ÇĞ°ú¹øÈ£ = '020';
-select  * from ÇĞ»ı2 where ÀÌ¼öÇĞÁ¡ >= 90 or ÀÌ¼öÇĞÁ¡ >= 120;
-select * from ÇĞ»ı2 where ÇĞ°ú¹øÈ£ != '020' and ÀÌ¼öÇĞÁ¡ > some(select ÀÌ¼öÇĞÁ¡ from ÇĞ»ı2 where ÇĞ°ú¹øÈ£ = '020');
--- some: Àû¾îµµ ÇÏ³ª ÀÌ»ó ÀÇ¹Ì
+select ì´ìˆ˜í•™ì  from í•™ìƒ2 where í•™ê³¼ë²ˆí˜¸ = '020';
+select  * from í•™ìƒ2 where ì´ìˆ˜í•™ì  >= 90 or ì´ìˆ˜í•™ì  >= 120;
+select * from í•™ìƒ2 where í•™ê³¼ë²ˆí˜¸ != '020' and ì´ìˆ˜í•™ì  > some(select ì´ìˆ˜í•™ì  from í•™ìƒ2 where í•™ê³¼ë²ˆí˜¸ = '020');
+-- some: ì ì–´ë„ í•˜ë‚˜ ì´ìƒ ì˜ë¯¸
 
-select * from ÇĞ»ı where ÀÌ¼öÇĞÁ¡ > all(select ÀÌ¼öÇĞÁ¡ from ÇĞ»ı where ÇĞ°ú¹øÈ£ = '020');
+select * from í•™ìƒ where ì´ìˆ˜í•™ì  > all(select ì´ìˆ˜í•™ì  from í•™ìƒ where í•™ê³¼ë²ˆí˜¸ = '020');
 
--- Àû¾îµµ 902ÇĞ¹øÀÇ ÇĞ»ıº¸´Ù Áß°£°í»ç Á¡¼ö°¡ ³ôÀº Ç×»ıÀÇ ÇĞ¹ø°ú Áß°£°í»ç Á¡¼ö °Ë»ö
+-- ì ì–´ë„ 902í•™ë²ˆì˜ í•™ìƒë³´ë‹¤ ì¤‘ê°„ê³ ì‚¬ ì ìˆ˜ê°€ ë†’ì€ í•­ìƒì˜ í•™ë²ˆê³¼ ì¤‘ê°„ê³ ì‚¬ ì ìˆ˜ ê²€ìƒ‰
                                                                                                                                                                                                                          
-select * from ÇĞ»ı;
+select * from í•™ìƒ;
 
-insert into ÇĞ»ı (ÇĞ¹ø, ÇĞ»ı¸í, ÇĞ³â) values('904', 'ÀÌ¼ø½Å', 3);
-insert into ÇĞ»ı values('905', '°­°¨Âù', 3);
+insert into í•™ìƒ (í•™ë²ˆ, í•™ìƒëª…, í•™ë…„) values('904', 'ì´ìˆœì‹ ', 3);
+insert into í•™ìƒ values('905', 'ê°•ê°ì°¬', 3);
 
 create table Test(
-    ÇĞ¹ø char(4),
-    ÇÙ»ı¸í char(10),
-    ÇĞ³â number(10)
+    í•™ë²ˆ char(4),
+    í•µìƒëª… char(10),
+    í•™ë…„ number(10)
 );
 
-insert into temp select * from ÇĞ»ı where ÇĞ³â = '3';
+insert into temp select * from í•™ìƒ where í•™ë…„ = '3';
 
 select * from Test;
 Delete from Test;
 
-insert into ÇĞ»ı(ÇĞ»ı¸í, ÇĞ¹ø) values('·ùÇöÁø', '908');
-insert into ÇĞ»ı(ÇĞ»ı¸í, ÇĞ¹ø, ÇĞ³â) values('¹ÚÂùÈ£', '908', null);
-insert into ÇĞ»ı values('910', '¼Û', 2);
+insert into í•™ìƒ(í•™ìƒëª…, í•™ë²ˆ) values('ë¥˜í˜„ì§„', '908');
+insert into í•™ìƒ(í•™ìƒëª…, í•™ë²ˆ, í•™ë…„) values('ë°•ì°¬í˜¸', '908', null);
+insert into í•™ìƒ values('910', 'ì†¡', 2);
 
 create table temp(
-    ÇĞ¹ø char(7)
+    í•™ë²ˆ char(7)
 );
 
--- ÇĞ»ı Å×ÀÌºí¿¡¼­ 3ÇĞ³â ÇĞ»ıÀÇ ÇĞ¹øÀ» tempÅ×ÀÌºí¿¡ Ãß°¡ ´Ü, insert¸í·É¾î´Â ÇÑ¹ø¸¸ »ç¿ë
-insert into temp select * from ÇĞ»ı where ÇĞ³â = 3;
+-- í•™ìƒ í…Œì´ë¸”ì—ì„œ 3í•™ë…„ í•™ìƒì˜ í•™ë²ˆì„ tempí…Œì´ë¸”ì— ì¶”ê°€ ë‹¨, insertëª…ë ¹ì–´ëŠ” í•œë²ˆë§Œ ì‚¬ìš©
+insert into temp select * from í•™ìƒ where í•™ë…„ = 3;
 
--- º¸³Ê½º¸¦ ¹ŞÁö ¾Ê´Â »ç¿øÀÌ ºÎ¼­º°·Î ¸î ¸íÀÎÁö Á¶È¸
+-- ë³´ë„ˆìŠ¤ë¥¼ ë°›ì§€ ì•ŠëŠ” ì‚¬ì›ì´ ë¶€ì„œë³„ë¡œ ëª‡ ëª…ì¸ì§€ ì¡°íšŒ
 select count(*) from emp where comm is null;
 select deptno, count(*) from emp where comm is null group by deptno order by deptno;
 
@@ -651,22 +651,22 @@ select deptno, count(*) from emp where comm is null group by deptno order by dep
 
 
 
--- ÆĞÅÏ #5 (select, from, group by, hacing)
--- ½ÇÇà ¼ø¼­: from -> group by -> having -> select -> order by 
+-- íŒ¨í„´ #5 (select, from, group by, hacing)
+-- ì‹¤í–‰ ìˆœì„œ: from -> group by -> having -> select -> order by 
 
--- 5¸í ÀÌ»ó ±Ù¹«ÇÏ´Â ºÎ¼­ ¹× ÀÎ¿ø¼ö¸¦ Á¶È¸
+-- 5ëª… ì´ìƒ ê·¼ë¬´í•˜ëŠ” ë¶€ì„œ ë° ì¸ì›ìˆ˜ë¥¼ ì¡°íšŒ
 select deptno, count(*) from emp group by deptno  having count(*) >= 5 order by deptno; 
--- empÅ×ÀÌºí¿¡¼­ ÃÖ°í±Ş¿©¿Í ÃÖÀú±Ş¿©ÀÇ Â÷ÀÌ°¡ 500 ÀÌ»óÀÎ ¾÷¹« Á¶È¸
+-- empí…Œì´ë¸”ì—ì„œ ìµœê³ ê¸‰ì—¬ì™€ ìµœì €ê¸‰ì—¬ì˜ ì°¨ì´ê°€ 500 ì´ìƒì¸ ì—…ë¬´ ì¡°íšŒ
 select job, max(sal), min(sal) from emp group by job having max(sal) - min(sal) >= 500;
-select job, max(sal), min(sal), max(sal) - min(sal) ±Ş¿©Â÷ from emp group by job having max(sal) - min(sal) >= 500 order by ±Ş¿©Â÷;--order by 4
--- ÀüÃ¼ »ç¿ø Áß¿¡¼­ ÃÖÃÊÀÔ»çÀÏ°ú ¸¶Áö¸·ÀÔ»çÀÏ Á¶È¸
-select max(hiredate) ¸¶Áö¸·ÀÔ»çÀÏ, min(hiredate) ÃÖÃÊÀÔ»çÀÏ from emp; 
--- ºÎ¼­º° ÃÖÃÊ ÀÔ»çÀÏ°ú ¸¶Áö¸· ÀÔ»çÀÏÀ» Á¶È¸
-select deptno, max(hiredate) ¸¶Áö¸·ÀÔ»çÀÏ, min(hiredate) ÃÖÃÊÀÔ»çÀÏ from emp group by deptno order by deptno;
--- ¾÷¹«º° ÃÖÃÊÀÔ»çÀÏ°ú ¸¶Áö¸· ÀÔ»çÀÏ Á¶È¸
-select job, max(hiredate) ¸¶Áö¸·ÀÔ»çÀÏ, min(hiredate) ÃÖÃÊÀÔ»çÀÏ from emp group by job;
--- ¾÷¹«º° ÃÖÃÊÀÔ»çÀÏ°ú ¸¶Áö¸·ÀÔ»çÀÏ Á¶È¸ ´Ü, ¸¶Áö¸·ÀÔ»çÀÏÀÌ 82³â ÀÌÀüÀÎ ¾÷¹«¸¸ Á¶È¸
-select job, max(hiredate) ¸¶Áö¸·ÀÔ»çÀÏ, min(hiredate) ÃÖÃÊÀÔ»çÀÏ from emp group by job having max(hiredate) < to_date('820101') order by 3;
+select job, max(sal), min(sal), max(sal) - min(sal) ê¸‰ì—¬ì°¨ from emp group by job having max(sal) - min(sal) >= 500 order by ê¸‰ì—¬ì°¨;--order by 4
+-- ì „ì²´ ì‚¬ì› ì¤‘ì—ì„œ ìµœì´ˆì…ì‚¬ì¼ê³¼ ë§ˆì§€ë§‰ì…ì‚¬ì¼ ì¡°íšŒ
+select max(hiredate) ë§ˆì§€ë§‰ì…ì‚¬ì¼, min(hiredate) ìµœì´ˆì…ì‚¬ì¼ from emp; 
+-- ë¶€ì„œë³„ ìµœì´ˆ ì…ì‚¬ì¼ê³¼ ë§ˆì§€ë§‰ ì…ì‚¬ì¼ì„ ì¡°íšŒ
+select deptno, max(hiredate) ë§ˆì§€ë§‰ì…ì‚¬ì¼, min(hiredate) ìµœì´ˆì…ì‚¬ì¼ from emp group by deptno order by deptno;
+-- ì—…ë¬´ë³„ ìµœì´ˆì…ì‚¬ì¼ê³¼ ë§ˆì§€ë§‰ ì…ì‚¬ì¼ ì¡°íšŒ
+select job, max(hiredate) ë§ˆì§€ë§‰ì…ì‚¬ì¼, min(hiredate) ìµœì´ˆì…ì‚¬ì¼ from emp group by job;
+-- ì—…ë¬´ë³„ ìµœì´ˆì…ì‚¬ì¼ê³¼ ë§ˆì§€ë§‰ì…ì‚¬ì¼ ì¡°íšŒ ë‹¨, ë§ˆì§€ë§‰ì…ì‚¬ì¼ì´ 82ë…„ ì´ì „ì¸ ì—…ë¬´ë§Œ ì¡°íšŒ
+select job, max(hiredate) ë§ˆì§€ë§‰ì…ì‚¬ì¼, min(hiredate) ìµœì´ˆì…ì‚¬ì¼ from emp group by job having max(hiredate) < to_date('820101') order by 3;
 
 
 
@@ -676,65 +676,65 @@ select job, max(hiredate) ¸¶Áö¸·ÀÔ»çÀÏ, min(hiredate) ÃÖÃÊÀÔ»çÀÏ from emp group 
 
 
 
--- ÆĞÅÏ #6 (select, from, where, group by, hacing)
--- ½ÇÇà ¼ø¼­: from -> where -> group by -> having -> select -> order by 
+-- íŒ¨í„´ #6 (select, from, where, group by, hacing)
+-- ì‹¤í–‰ ìˆœì„œ: from -> where -> group by -> having -> select -> order by 
 
 
--- ±Ş¿©°¡ 1000 ÀÌ»óÀÎ »ç¿øµéÀÇ ¾÷¹«º°·Î ³ª´²¼­ Áı°èÇÏ±â
--- ´Ü, ºÎ¼­º° ÃÖÀú±Ş¿©°¡ 2000 ÀÌ»óÀÎ °á°ú¸¸ Ãâ·ÂÇÏµµ·Ï ÇÒ °Í
--- Áı°èÇÔ¼ö : ¾÷¹«º° »ç¿ø¼ö-count, ¾÷¹«º° ÃÖ´ë±Ş¿©-max, ¾÷¹«º° ÃÖ¼Ò±Ş¿©-min
--- ** Áı°èÇÔ¼ö°¡ ¾Æ´Ñ °Í°ú °°ÀÌ ¾µ¸é ¿¡·¯³²/ group byÀÇ Á¶°ÇÀº ¾µ¼ö ÀÖÀ½
+-- ê¸‰ì—¬ê°€ 1000 ì´ìƒì¸ ì‚¬ì›ë“¤ì˜ ì—…ë¬´ë³„ë¡œ ë‚˜ëˆ ì„œ ì§‘ê³„í•˜ê¸°
+-- ë‹¨, ë¶€ì„œë³„ ìµœì €ê¸‰ì—¬ê°€ 2000 ì´ìƒì¸ ê²°ê³¼ë§Œ ì¶œë ¥í•˜ë„ë¡ í•  ê²ƒ
+-- ì§‘ê³„í•¨ìˆ˜ : ì—…ë¬´ë³„ ì‚¬ì›ìˆ˜-count, ì—…ë¬´ë³„ ìµœëŒ€ê¸‰ì—¬-max, ì—…ë¬´ë³„ ìµœì†Œê¸‰ì—¬-min
+-- ** ì§‘ê³„í•¨ìˆ˜ê°€ ì•„ë‹Œ ê²ƒê³¼ ê°™ì´ ì“¸ë©´ ì—ëŸ¬ë‚¨/ group byì˜ ì¡°ê±´ì€ ì“¸ìˆ˜ ìˆìŒ
 select * from emp;
 select count(*), max(sal), min(sal), sum(sal), avg(sal) from emp;
 select deptno, count(*) from emp group by deptno;
-select job, count(*) »ç¿ø¼ö, max(sal) ºÎ¼­º°ÃÖ´ë±Ş¿©, min(sal) ºÎ¼­º°ÃÖ¼Ò±Ş¿© from emp where sal >= 1000 group by job having min(sal) >= 2000;
--- havingÀº group by°¡ ¹İµå½Ã ÀÖ¾î¾ß ÇÔ 
+select job, count(*) ì‚¬ì›ìˆ˜, max(sal) ë¶€ì„œë³„ìµœëŒ€ê¸‰ì—¬, min(sal) ë¶€ì„œë³„ìµœì†Œê¸‰ì—¬ from emp where sal >= 1000 group by job having min(sal) >= 2000;
+-- havingì€ group byê°€ ë°˜ë“œì‹œ ìˆì–´ì•¼ í•¨ 
 
 
--- Ä¿¹Ì¼ÇÀ» ¹ŞÁö ¾Ê´Â »ç¿øÀÌ ºÎ¼­º°·Î ¸î ¸íÀÎÁö Á¶È¸
--- ´Ü, Ä¿¹Ì¼ÇÀ» ¹ŞÁö »ç¿øÀÌ 3¸í ÀÌ»óÀÎ °á°ú¸¸ Ãâ·Â
+-- ì»¤ë¯¸ì…˜ì„ ë°›ì§€ ì•ŠëŠ” ì‚¬ì›ì´ ë¶€ì„œë³„ë¡œ ëª‡ ëª…ì¸ì§€ ì¡°íšŒ
+-- ë‹¨, ì»¤ë¯¸ì…˜ì„ ë°›ì§€ ì‚¬ì›ì´ 3ëª… ì´ìƒì¸ ê²°ê³¼ë§Œ ì¶œë ¥
 select deptno, count(*) from emp where comm is null group by deptno having count(*) >= 3 order by deptno;
 
 
--- ºÎ¼­º° ÀÎ¿ø¼ö¸¦ ±¸ÇÑ ´ÙÀ½, °á°ú°ª¿¡¼­ 20¹ø ºÎ¼­ Á¦¿Ü
+-- ë¶€ì„œë³„ ì¸ì›ìˆ˜ë¥¼ êµ¬í•œ ë‹¤ìŒ, ê²°ê³¼ê°’ì—ì„œ 20ë²ˆ ë¶€ì„œ ì œì™¸
 select deptno, count(*) from emp group by deptno;
--- whereÀı, havingÀı µÑ ´Ù »ç¿ë°¡´ÉÇÏ³ª whereÀıÀ» »ç¿ëÇÏ´Â°Ô ¼º´É¿¡ ÁÁÀ½
--- ½ÇÇà¼ø¼­*
--- whereÀı¿¡¼­ ÇÊÅÍ¸µÇÑ ´ÙÀ½¿¡ ±×·ìÈ­ -> ¼º´É¿¡ ÁÁÀ½
+-- whereì ˆ, havingì ˆ ë‘˜ ë‹¤ ì‚¬ìš©ê°€ëŠ¥í•˜ë‚˜ whereì ˆì„ ì‚¬ìš©í•˜ëŠ”ê²Œ ì„±ëŠ¥ì— ì¢‹ìŒ
+-- ì‹¤í–‰ìˆœì„œ*
+-- whereì ˆì—ì„œ í•„í„°ë§í•œ ë‹¤ìŒì— ê·¸ë£¹í™” -> ì„±ëŠ¥ì— ì¢‹ìŒ
 select deptno, count(*) from emp where deptno != 20 group by deptno order by deptno;
 
--- havingÀı¿¡¼­ ÇÊÅÍ¸µ -> ÀüÃ¼ µ¥ÀÌÅÍ¸¦ ±×·ìÈ­ÇÏ°í, ¿¬»êÀ» ¼öÇàÇÏ¹Ç·Î °á°ú¿¡ Æ÷ÇÔµÇÁö ¾ÊÀ» µ¥ÀÌÅÍ±îÁöµµ ±×·ìÈ­¸¦ ÁøÇàÇÏ¹Ç·Î ºñÈ¿À²Àû
+-- havingì ˆì—ì„œ í•„í„°ë§ -> ì „ì²´ ë°ì´í„°ë¥¼ ê·¸ë£¹í™”í•˜ê³ , ì—°ì‚°ì„ ìˆ˜í–‰í•˜ë¯€ë¡œ ê²°ê³¼ì— í¬í•¨ë˜ì§€ ì•Šì„ ë°ì´í„°ê¹Œì§€ë„ ê·¸ë£¹í™”ë¥¼ ì§„í–‰í•˜ë¯€ë¡œ ë¹„íš¨ìœ¨ì 
 select deptno, count(*) from emp group by deptno having deptno != 20;
 
 
--- empÅ×ÀÌºí¿¡¼­ ºÎ¼­º° »ç¿ø¼ö°¡ 5¸í ÀÌ»óÀÎ ºÎ¼­ÀÇ ºÎ¼­¹øÈ£, »ç¿ø¼ö¸¦ Á¶È¸
+-- empí…Œì´ë¸”ì—ì„œ ë¶€ì„œë³„ ì‚¬ì›ìˆ˜ê°€ 5ëª… ì´ìƒì¸ ë¶€ì„œì˜ ë¶€ì„œë²ˆí˜¸, ì‚¬ì›ìˆ˜ë¥¼ ì¡°íšŒ
 select deptno, count(*) from emp group by deptno order by deptno;
 
-select deptno, count(*) from emp where count(*) >= 5 group by deptno; -- ¿¡·¯ ¹ß»ı:½ÇÇà¼ø¼­
+select deptno, count(*) from emp where count(*) >= 5 group by deptno; -- ì—ëŸ¬ ë°œìƒ:ì‹¤í–‰ìˆœì„œ
 
--- ¿¬½À¹®Á¦
--- dept Å×ÀÌºíÀÇ ¸ğµç Á¤º¸ Á¶È¸
+-- ì—°ìŠµë¬¸ì œ
+-- dept í…Œì´ë¸”ì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ
 select * from dept;
 select * from emp;
 
--- martinÀÇ ±Ş¿©¿Í ºÎ¼­¹øÈ£ Á¶È¸
+-- martinì˜ ê¸‰ì—¬ì™€ ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
 select sal, deptno from emp where ename = 'MARTIN';
--- 50¹ø ºÎ¼­ÀÇ ºÎ¼­ÀÌ¸§Àº ¹«¾ùÀÎÁö Á¶È¸
+-- 50ë²ˆ ë¶€ì„œì˜ ë¶€ì„œì´ë¦„ì€ ë¬´ì—‡ì¸ì§€ ì¡°íšŒ
 select deptno, dname from dept where deptno = 50;
--- scottÀÇ ÀÌ¸§, ±Ş¿©, ºÎ¼­ÀÌ¸§ Á¶È¸(Á¶ÀÎ-°øÅëµÈ ¼Ó¼º ÇÊ¿ä)
+-- scottì˜ ì´ë¦„, ê¸‰ì—¬, ë¶€ì„œì´ë¦„ ì¡°íšŒ(ì¡°ì¸-ê³µí†µëœ ì†ì„± í•„ìš”)
 select emp.ename, emp.sal, dept.dname from emp, dept where emp.deptno = dept.deptno and emp.ename = 'SCOTT'; 
--- locations Å×ÀÌºí¿¡¼­ Áö¿ªÄÚµå¿Í µµ½Ã¸í Á¶È¸
+-- locations í…Œì´ë¸”ì—ì„œ ì§€ì—­ì½”ë“œì™€ ë„ì‹œëª… ì¡°íšŒ
 desc locations;
 select * from locations;
 select loc_code, city from locations;
 
 select dept.dname, locations.city from dept, locations where dept.loc_code = locations.loc_code;
 
--- ½º¹Ì½ºÀÇ ±Ş¿©, ºÎ¼­ÀÌ¸§, ±Ù¹«ÁöÀÌ¸§ Á¶È¸
+-- ìŠ¤ë¯¸ìŠ¤ì˜ ê¸‰ì—¬, ë¶€ì„œì´ë¦„, ê·¼ë¬´ì§€ì´ë¦„ ì¡°íšŒ
 -- select emp.sal, dept.dname, locations.city from emp, dept, locations where emp.deptno = dept.deptno and dept.loc_code = lcoation.loc_code and emp.
 
 
--- emp Å×ÀÌºí¿¡¼­ ºÎ¼­º° »ç¿ø¼ö Á¶È¸(ºÎ¼­º°·Î ¿À¸§Â÷¼ø Á¤·Ä)
+-- emp í…Œì´ë¸”ì—ì„œ ë¶€ì„œë³„ ì‚¬ì›ìˆ˜ ì¡°íšŒ(ë¶€ì„œë³„ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬)
 select deptno, count(*) from emp group by deptno order by deptno;
 
 
@@ -744,20 +744,3109 @@ select deptno, count(*) from emp group by deptno order by deptno;
 
 
 
+--------------------------------------------------------------
+--drop table departments cascade CONSTRAINTS;
+--drop table employees cascade CONSTRAINTS;
+--drop table jobs cascade CONSTRAINTS;
+--drop table job_grades cascade CONSTRAINTS;
+--drop table job_history cascade CONSTRAINTS;
+--drop table locations cascade CONSTRAINTS;
+--drop table regions cascade CONSTRAINTS;
+--drop table countries cascade CONSTRAINTS;
+
+SET FEEDBACK 1
+SET NUMWIDTH 10
+SET LINESIZE 80
+SET TRIMSPOOL ON
+SET TAB OFF
+SET PAGESIZE 100
+SET ECHO OFF 
+
+
+CREATE TABLE regions
+    ( region_id      NUMBER 
+       CONSTRAINT  region_id_nn NOT NULL 
+    , region_name    VARCHAR2(25) 
+    );
+
+CREATE UNIQUE INDEX reg_id_pk
+ON regions (region_id);
+
+ALTER TABLE regions
+ADD ( CONSTRAINT reg_id_pk
+       		 PRIMARY KEY (region_id)
+    ) ;
+
+CREATE TABLE countries 
+    ( country_id      CHAR(2) 
+       CONSTRAINT  country_id_nn NOT NULL 
+    , country_name    VARCHAR2(40) 
+    , region_id       NUMBER 
+    , CONSTRAINT     country_c_id_pk 
+        	     PRIMARY KEY (country_id) 
+    ) 
+    ORGANIZATION INDEX; 
+
+ALTER TABLE countries
+ADD ( CONSTRAINT countr_reg_fk
+        	 FOREIGN KEY (region_id)
+          	  REFERENCES regions(region_id) 
+    ) ;
+
+CREATE TABLE locations
+    ( location_id    NUMBER(4)
+    , street_address VARCHAR2(40)
+    , postal_code    VARCHAR2(12)
+    , city       VARCHAR2(30)
+	CONSTRAINT     loc_city_nn  NOT NULL
+    , state_province VARCHAR2(25)
+    , country_id     CHAR(2)
+    ) ;
+
+CREATE UNIQUE INDEX loc_id_pk
+ON locations (location_id) ;
+
+ALTER TABLE locations
+ADD ( CONSTRAINT loc_id_pk
+       		 PRIMARY KEY (location_id)
+    , CONSTRAINT loc_c_id_fk
+       		 FOREIGN KEY (country_id)
+        	  REFERENCES countries(country_id) 
+    ) ;
+
+
+CREATE TABLE departments
+    ( department_id    NUMBER(4)
+    , department_name  VARCHAR2(30)
+	CONSTRAINT  dept_name_nn  NOT NULL
+    , manager_id       NUMBER(6)
+    , location_id      NUMBER(4)
+    ) ;
+
+
+
+CREATE UNIQUE INDEX dept_id_pk
+ON departments (department_id) ;
+
+ALTER TABLE departments
+ADD ( CONSTRAINT dept_id_pk
+       		 PRIMARY KEY (department_id)
+    , CONSTRAINT dept_loc_fk
+       		 FOREIGN KEY (location_id)
+        	  REFERENCES locations (location_id)
+     ) ;
+
+--CREATE SEQUENCE departments_seq
+-- START WITH     280
+-- INCREMENT BY   10
+-- MAXVALUE       9990
+-- NOCACHE
+-- NOCYCLE;
+
+CREATE TABLE jobs
+    ( job_id         VARCHAR2(10)
+    , job_title      VARCHAR2(35)
+	CONSTRAINT     job_title_nn  NOT NULL
+    , min_salary     NUMBER(6)
+    , max_salary     NUMBER(6)
+    ) ;
+
+CREATE UNIQUE INDEX job_id_pk 
+ON jobs (job_id) ;
+
+ALTER TABLE jobs
+ADD ( CONSTRAINT job_id_pk
+      		 PRIMARY KEY(job_id)
+    ) ;
+
+CREATE TABLE employees
+    ( employee_id    NUMBER(6)
+    , first_name     VARCHAR2(20)
+    , last_name      VARCHAR2(25)
+	 CONSTRAINT     emp_last_name_nn  NOT NULL
+    , email          VARCHAR2(25)
+	CONSTRAINT     emp_email_nn  NOT NULL
+    , phone_number   VARCHAR2(20)
+    , hire_date      DATE
+	CONSTRAINT     emp_hire_date_nn  NOT NULL
+    , job_id         VARCHAR2(10)
+	CONSTRAINT     emp_job_nn  NOT NULL
+    , salary         NUMBER(8,2)
+    , commission_pct NUMBER(2,2)
+    , manager_id     NUMBER(6)
+    , department_id  NUMBER(4)
+    , CONSTRAINT     emp_salary_min
+                     CHECK (salary > 0) 
+    , CONSTRAINT     emp_email_uk
+                     UNIQUE (email)
+    ) ;
+
+CREATE UNIQUE INDEX emp_emp_id_pk
+ON employees (employee_id) ;
+
+
+ALTER TABLE employees
+ADD ( CONSTRAINT     emp_emp_id_pk
+                     PRIMARY KEY (employee_id)
+    , CONSTRAINT     emp_dept_fk
+                     FOREIGN KEY (department_id)
+                      REFERENCES departments
+    , CONSTRAINT     emp_job_fk
+                     FOREIGN KEY (job_id)
+                      REFERENCES jobs (job_id)
+    , CONSTRAINT     emp_manager_fk
+                     FOREIGN KEY (manager_id)
+                      REFERENCES employees
+    ) ;
+
+ALTER TABLE departments
+ADD ( CONSTRAINT dept_mgr_fk
+      		 FOREIGN KEY (manager_id)
+      		  REFERENCES employees (employee_id)
+    ) ;
+
+
+--CREATE SEQUENCE employees_seq
+-- START WITH     207
+-- INCREMENT BY   1
+-- NOCACHE
+-- NOCYCLE;
+
+
+CREATE TABLE job_history
+    ( employee_id   NUMBER(6)
+	 CONSTRAINT    jhist_employee_nn  NOT NULL
+    , start_date    DATE
+	CONSTRAINT    jhist_start_date_nn  NOT NULL
+    , end_date      DATE
+	CONSTRAINT    jhist_end_date_nn  NOT NULL
+    , job_id        VARCHAR2(10)
+	CONSTRAINT    jhist_job_nn  NOT NULL
+    , department_id NUMBER(4)
+    , CONSTRAINT    jhist_date_interval
+                    CHECK (end_date > start_date)
+    ) ;
+
+CREATE UNIQUE INDEX jhist_emp_id_st_date_pk 
+ON job_history (employee_id, start_date) ;
+
+ALTER TABLE job_history
+ADD ( CONSTRAINT jhist_emp_id_st_date_pk
+      PRIMARY KEY (employee_id, start_date)
+    , CONSTRAINT     jhist_job_fk
+                     FOREIGN KEY (job_id)
+                     REFERENCES jobs
+    , CONSTRAINT     jhist_emp_fk
+                     FOREIGN KEY (employee_id)
+                     REFERENCES employees
+    , CONSTRAINT     jhist_dept_fk
+                     FOREIGN KEY (department_id)
+                     REFERENCES departments
+    ) ;
+
+----------------------------------------
+
+--CREATE OR REPLACE VIEW emp_details_view
+--  (employee_id,
+--   job_id,
+--   manager_id,
+--   department_id,
+--   location_id,
+--   country_id,
+--   first_name,
+--   last_name,
+--   salary,
+--   commission_pct,
+--   department_name,
+--   job_title,
+--   city,
+--   state_province,
+--   country_name,
+--   region_name)
+--AS SELECT
+--  e.employee_id, 
+--  e.job_id, 
+--  e.manager_id, 
+--  e.department_id,
+--  d.location_id,
+--  l.country_id,
+--  e.first_name,
+--  e.last_name,
+--  e.salary,
+--  e.commission_pct,
+--  d.department_name,
+--  j.job_title,
+--  l.city,
+--  l.state_province,
+--  c.country_name,
+--  r.region_name
+--FROM
+--  employees e,
+--  departments d,
+--  jobs j,
+--  locations l,
+--  countries c,
+--  regions r
+--WHERE e.department_id = d.department_id
+--  AND d.location_id = l.location_id
+--  AND l.country_id = c.country_id
+--  AND c.region_id = r.region_id
+--  AND j.job_id = e.job_id 
+--WITH READ ONLY;
+
+COMMIT;
+
+SET VERIFY OFF
+ALTER SESSION SET NLS_LANGUAGE=American; 
+
+
+INSERT INTO regions VALUES 
+        ( 1
+        , 'Europe' 
+        );
+
+INSERT INTO regions VALUES 
+        ( 2
+        , 'Americas' 
+        );
+
+INSERT INTO regions VALUES 
+        ( 3
+        , 'Asia' 
+        );
+
+INSERT INTO regions VALUES 
+        ( 4
+        , 'Middle East and Africa' 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'IT'
+        , 'Italy'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'JP'
+        , 'Japan'
+	, 3 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'US'
+        , 'United States of America'
+        , 2 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'CA'
+        , 'Canada'
+        , 2 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'CN'
+        , 'China'
+        , 3 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'IN'
+        , 'India'
+        , 3 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'AU'
+        , 'Australia'
+        , 3 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'ZW'
+        , 'Zimbabwe'
+        , 4 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'SG'
+        , 'Singapore'
+        , 3 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'UK'
+        , 'United Kingdom'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'FR'
+        , 'France'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'DE'
+        , 'Germany'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'ZM'
+        , 'Zambia'
+        , 4 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'EG'
+        , 'Egypt'
+        , 4 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'BR'
+        , 'Brazil'
+        , 2 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'CH'
+        , 'Switzerland'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'NL'
+        , 'Netherlands'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'MX'
+        , 'Mexico'
+        , 2 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'KW'
+        , 'Kuwait'
+        , 4 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'IL'
+        , 'Israel'
+        , 4 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'DK'
+        , 'Denmark'
+        , 1 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'HK'
+        , 'HongKong'
+        , 3 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'NG'
+        , 'Nigeria'
+        , 4 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'AR'
+        , 'Argentina'
+        , 2 
+        );
+
+INSERT INTO countries VALUES 
+        ( 'BE'
+        , 'Belgium'
+        , 1 
+        );
+
+INSERT INTO locations VALUES 
+        ( 1000 
+        , '1297 Via Cola di Rie'
+        , '00989'
+        , 'Roma'
+        , NULL
+        , 'IT'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1100 
+        , '93091 Calle della Testa'
+        , '10934'
+        , 'Venice'
+        , NULL
+        , 'IT'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1200 
+        , '2017 Shinjuku-ku'
+        , '1689'
+        , 'Tokyo'
+        , 'Tokyo Prefecture'
+        , 'JP'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1300 
+        , '9450 Kamiya-cho'
+        , '6823'
+        , 'Hiroshima'
+        , NULL
+        , 'JP'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1400 
+        , '2014 Jabberwocky Rd'
+        , '26192'
+        , 'Southlake'
+        , 'Texas'
+        , 'US'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1500 
+        , '2011 Interiors Blvd'
+        , '99236'
+        , 'South San Francisco'
+        , 'California'
+        , 'US'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1600 
+        , '2007 Zagora St'
+        , '50090'
+        , 'South Brunswick'
+        , 'New Jersey'
+        , 'US'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1700 
+        , '2004 Charade Rd'
+        , '98199'
+        , 'Seattle'
+        , 'Washington'
+        , 'US'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1800 
+        , '147 Spadina Ave'
+        , 'M5V 2L7'
+        , 'Toronto'
+        , 'Ontario'
+        , 'CA'
+        );
+
+INSERT INTO locations VALUES 
+        ( 1900 
+        , '6092 Boxwood St'
+        , 'YSW 9T2'
+        , 'Whitehorse'
+        , 'Yukon'
+        , 'CA'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2000 
+        , '40-5-12 Laogianggen'
+        , '190518'
+        , 'Beijing'
+        , NULL
+        , 'CN'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2100 
+        , '1298 Vileparle (E)'
+        , '490231'
+        , 'Bombay'
+        , 'Maharashtra'
+        , 'IN'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2200 
+        , '12-98 Victoria Street'
+        , '2901'
+        , 'Sydney'
+        , 'New South Wales'
+        , 'AU'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2300 
+        , '198 Clementi North'
+        , '540198'
+        , 'Singapore'
+        , NULL
+        , 'SG'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2400 
+        , '8204 Arthur St'
+        , NULL
+        , 'London'
+        , NULL
+        , 'UK'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2500 
+        , 'Magdalen Centre, The Oxford Science Park'
+        , 'OX9 9ZB'
+        , 'Oxford'
+        , 'Oxford'
+        , 'UK'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2600 
+        , '9702 Chester Road'
+        , '09629850293'
+        , 'Stretford'
+        , 'Manchester'
+        , 'UK'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2700 
+        , 'Schwanthalerstr. 7031'
+        , '80925'
+        , 'Munich'
+        , 'Bavaria'
+        , 'DE'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2800 
+        , 'Rua Frei Caneca 1360 '
+        , '01307-002'
+        , 'Sao Paulo'
+        , 'Sao Paulo'
+        , 'BR'
+        );
+
+INSERT INTO locations VALUES 
+        ( 2900 
+        , '20 Rue des Corps-Saints'
+        , '1730'
+        , 'Geneva'
+        , 'Geneve'
+        , 'CH'
+        );
+
+INSERT INTO locations VALUES 
+        ( 3000 
+        , 'Murtenstrasse 921'
+        , '3095'
+        , 'Bern'
+        , 'BE'
+        , 'CH'
+        );
+
+INSERT INTO locations VALUES 
+        ( 3100 
+        , 'Pieter Breughelstraat 837'
+        , '3029SK'
+        , 'Utrecht'
+        , 'Utrecht'
+        , 'NL'
+        );
+
+INSERT INTO locations VALUES 
+        ( 3200 
+        , 'Mariano Escobedo 9991'
+        , '11932'
+        , 'Mexico City'
+        , 'Distrito Federal,'
+        , 'MX'
+        );
+
+
+ALTER TABLE departments 
+  DISABLE CONSTRAINT dept_mgr_fk;
+
+INSERT INTO departments VALUES 
+        ( 10
+        , 'Administration'
+        , 200
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 20
+        , 'Marketing'
+        , 201
+        , 1800
+        );
+                                
+INSERT INTO departments VALUES 
+        ( 30
+        , 'Purchasing'
+        , 114
+        , 1700
+	);
+                
+INSERT INTO departments VALUES 
+        ( 40
+        , 'Human Resources'
+        , 203
+        , 2400
+        );
+
+INSERT INTO departments VALUES 
+        ( 50
+        , 'Shipping'
+        , 121
+        , 1500
+        );
+                
+INSERT INTO departments VALUES 
+        ( 60 
+        , 'IT'
+        , 103
+        , 1400
+        );
+                
+INSERT INTO departments VALUES 
+        ( 70 
+        , 'Public Relations'
+        , 204
+        , 2700
+        );
+                
+INSERT INTO departments VALUES 
+        ( 80 
+        , 'Sales'
+        , 145
+        , 2500
+        );
+                
+INSERT INTO departments VALUES 
+        ( 90 
+        , 'Executive'
+        , 100
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 100 
+        , 'Finance'
+        , 108
+        , 1700
+        );
+                
+INSERT INTO departments VALUES 
+        ( 110 
+        , 'Accounting'
+        , 205
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 120 
+        , 'Treasury'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 130 
+        , 'Corporate Tax'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 140 
+        , 'Control And Credit'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 150 
+        , 'Shareholder Services'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 160 
+        , 'Benefits'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 170 
+        , 'Manufacturing'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 180 
+        , 'Construction'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 190 
+        , 'Contracting'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 200 
+        , 'Operations'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 210 
+        , 'IT Support'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 220 
+        , 'NOC'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 230 
+        , 'IT Helpdesk'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 240 
+        , 'Government Sales'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 250 
+        , 'Retail Sales'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 260 
+        , 'Recruiting'
+        , NULL
+        , 1700
+        );
+
+INSERT INTO departments VALUES 
+        ( 270 
+        , 'Payroll'
+        , NULL
+        , 1700
+        );
+
+
+INSERT INTO jobs VALUES 
+        ( 'AD_PRES'
+        , 'President'
+        , 20000
+        , 40000
+        );
+INSERT INTO jobs VALUES 
+        ( 'AD_VP'
+        , 'Administration Vice President'
+        , 15000
+        , 30000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'AD_ASST'
+        , 'Administration Assistant'
+        , 3000
+        , 6000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'FI_MGR'
+        , 'Finance Manager'
+        , 8200
+        , 16000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'FI_ACCOUNT'
+        , 'Accountant'
+        , 4200
+        , 9000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'AC_MGR'
+        , 'Accounting Manager'
+        , 8200
+        , 16000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'AC_ACCOUNT'
+        , 'Public Accountant'
+        , 4200
+        , 9000
+        );
+INSERT INTO jobs VALUES 
+        ( 'SA_MAN'
+        , 'Sales Manager'
+        , 10000
+        , 20000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'SA_REP'
+        , 'Sales Representative'
+        , 6000
+        , 12000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'PU_MAN'
+        , 'Purchasing Manager'
+        , 8000
+        , 15000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'PU_CLERK'
+        , 'Purchasing Clerk'
+        , 2500
+        , 5500
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'ST_MAN'
+        , 'Stock Manager'
+        , 5500
+        , 8500
+        );
+INSERT INTO jobs VALUES 
+        ( 'ST_CLERK'
+        , 'Stock Clerk'
+        , 2000
+        , 5000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'SH_CLERK'
+        , 'Shipping Clerk'
+        , 2500
+        , 5500
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'IT_PROG'
+        , 'Programmer'
+        , 4000
+        , 10000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'MK_MAN'
+        , 'Marketing Manager'
+        , 9000
+        , 15000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'MK_REP'
+        , 'Marketing Representative'
+        , 4000
+        , 9000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'HR_REP'
+        , 'Human Resources Representative'
+        , 4000
+        , 9000
+        );
+
+INSERT INTO jobs VALUES 
+        ( 'PR_REP'
+        , 'Public Relations Representative'
+        , 4500
+        , 10500
+        );
+
+INSERT INTO employees VALUES 
+        ( 100
+        , 'Steven'
+        , 'King'
+        , 'SKING'
+        , '515.123.4567'
+        , TO_DATE('17-JUN-1987', 'dd-MON-yyyy')
+        , 'AD_PRES'
+        , 24000
+        , NULL
+        , NULL
+        , 90
+        );
+
+INSERT INTO employees VALUES 
+        ( 101
+        , 'Neena'
+        , 'Kochhar'
+        , 'NKOCHHAR'
+        , '515.123.4568'
+        , TO_DATE('21-SEP-1989', 'dd-MON-yyyy')
+        , 'AD_VP'
+        , 17000
+        , NULL
+        , 100
+        , 90
+        );
+
+INSERT INTO employees VALUES 
+        ( 102
+        , 'Lex'
+        , 'De Haan'
+        , 'LDEHAAN'
+        , '515.123.4569'
+        , TO_DATE('13-JAN-1993', 'dd-MON-yyyy')
+        , 'AD_VP'
+        , 17000
+        , NULL
+        , 100
+        , 90
+        );
+
+INSERT INTO employees VALUES 
+        ( 103
+        , 'Alexander'
+        , 'Hunold'
+        , 'AHUNOLD'
+        , '590.423.4567'
+        , TO_DATE('03-JAN-1990', 'dd-MON-yyyy')
+        , 'IT_PROG'
+        , 9000
+        , NULL
+        , 102
+        , 60
+        );
+
+INSERT INTO employees VALUES 
+        ( 104
+        , 'Bruce'
+        , 'Ernst'
+        , 'BERNST'
+        , '590.423.4568'
+        , TO_DATE('21-MAY-1991', 'dd-MON-yyyy')
+        , 'IT_PROG'
+        , 6000
+        , NULL
+        , 103
+        , 60
+        );
+
+INSERT INTO employees VALUES 
+        ( 105
+        , 'David'
+        , 'Austin'
+        , 'DAUSTIN'
+        , '590.423.4569'
+        , TO_DATE('25-JUN-1997', 'dd-MON-yyyy')
+        , 'IT_PROG'
+        , 4800
+        , NULL
+        , 103
+        , 60
+        );
+
+INSERT INTO employees VALUES 
+        ( 106
+        , 'Valli'
+        , 'Pataballa'
+        , 'VPATABAL'
+        , '590.423.4560'
+        , TO_DATE('05-FEB-1998', 'dd-MON-yyyy')
+        , 'IT_PROG'
+        , 4800
+        , NULL
+        , 103
+        , 60
+        );
+
+INSERT INTO employees VALUES 
+        ( 107
+        , 'Diana'
+        , 'Lorentz'
+        , 'DLORENTZ'
+        , '590.423.5567'
+        , TO_DATE('07-FEB-1999', 'dd-MON-yyyy')
+        , 'IT_PROG'
+        , 4200
+        , NULL
+        , 103
+        , 60
+        );
+
+INSERT INTO employees VALUES 
+        ( 108
+        , 'Nancy'
+        , 'Greenberg'
+        , 'NGREENBE'
+        , '515.124.4569'
+        , TO_DATE('17-AUG-1994', 'dd-MON-yyyy')
+        , 'FI_MGR'
+        , 12000
+        , NULL
+        , 101
+        , 100
+        );
+
+INSERT INTO employees VALUES 
+        ( 109
+        , 'Daniel'
+        , 'Faviet'
+        , 'DFAVIET'
+        , '515.124.4169'
+        , TO_DATE('16-AUG-1994', 'dd-MON-yyyy')
+        , 'FI_ACCOUNT'
+        , 9000
+        , NULL
+        , 108
+        , 100
+        );
+
+INSERT INTO employees VALUES 
+        ( 110
+        , 'John'
+        , 'Chen'
+        , 'JCHEN'
+        , '515.124.4269'
+        , TO_DATE('28-SEP-1997', 'dd-MON-yyyy')
+        , 'FI_ACCOUNT'
+        , 8200
+        , NULL
+        , 108
+        , 100
+        );
+
+INSERT INTO employees VALUES 
+        ( 111
+        , 'Ismael'
+        , 'Sciarra'
+        , 'ISCIARRA'
+        , '515.124.4369'
+        , TO_DATE('30-SEP-1997', 'dd-MON-yyyy')
+        , 'FI_ACCOUNT'
+        , 7700
+        , NULL
+        , 108
+        , 100
+        );
+
+INSERT INTO employees VALUES 
+        ( 112
+        , 'Jose Manuel'
+        , 'Urman'
+        , 'JMURMAN'
+        , '515.124.4469'
+        , TO_DATE('07-MAR-1998', 'dd-MON-yyyy')
+        , 'FI_ACCOUNT'
+        , 7800
+        , NULL
+        , 108
+        , 100
+        );
+
+INSERT INTO employees VALUES 
+        ( 113
+        , 'Luis'
+        , 'Popp'
+        , 'LPOPP'
+        , '515.124.4567'
+        , TO_DATE('07-DEC-1999', 'dd-MON-yyyy')
+        , 'FI_ACCOUNT'
+        , 6900
+        , NULL
+        , 108
+        , 100
+        );
+
+INSERT INTO employees VALUES 
+        ( 114
+        , 'Den'
+        , 'Raphaely'
+        , 'DRAPHEAL'
+        , '515.127.4561'
+        , TO_DATE('07-DEC-1994', 'dd-MON-yyyy')
+        , 'PU_MAN'
+        , 11000
+        , NULL
+        , 100
+        , 30
+        );
+
+INSERT INTO employees VALUES 
+        ( 115
+        , 'Alexander'
+        , 'Khoo'
+        , 'AKHOO'
+        , '515.127.4562'
+        , TO_DATE('18-MAY-1995', 'dd-MON-yyyy')
+        , 'PU_CLERK'
+        , 3100
+        , NULL
+        , 114
+        , 30
+        );
+
+INSERT INTO employees VALUES 
+        ( 116
+        , 'Shelli'
+        , 'Baida'
+        , 'SBAIDA'
+        , '515.127.4563'
+        , TO_DATE('24-DEC-1997', 'dd-MON-yyyy')
+        , 'PU_CLERK'
+        , 2900
+        , NULL
+        , 114
+        , 30
+        );
+
+INSERT INTO employees VALUES 
+        ( 117
+        , 'Sigal'
+        , 'Tobias'
+        , 'STOBIAS'
+        , '515.127.4564'
+        , TO_DATE('24-JUL-1997', 'dd-MON-yyyy')
+        , 'PU_CLERK'
+        , 2800
+        , NULL
+        , 114
+        , 30
+        );
+
+INSERT INTO employees VALUES 
+        ( 118
+        , 'Guy'
+        , 'Himuro'
+        , 'GHIMURO'
+        , '515.127.4565'
+        , TO_DATE('15-NOV-1998', 'dd-MON-yyyy')
+        , 'PU_CLERK'
+        , 2600
+        , NULL
+        , 114
+        , 30
+        );
+
+INSERT INTO employees VALUES 
+        ( 119
+        , 'Karen'
+        , 'Colmenares'
+        , 'KCOLMENA'
+        , '515.127.4566'
+        , TO_DATE('10-AUG-1999', 'dd-MON-yyyy')
+        , 'PU_CLERK'
+        , 2500
+        , NULL
+        , 114
+        , 30
+        );
+
+INSERT INTO employees VALUES 
+        ( 120
+        , 'Matthew'
+        , 'Weiss'
+        , 'MWEISS'
+        , '650.123.1234'
+        , TO_DATE('18-JUL-1996', 'dd-MON-yyyy')
+        , 'ST_MAN'
+        , 8000
+        , NULL
+        , 100
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 121
+        , 'Adam'
+        , 'Fripp'
+        , 'AFRIPP'
+        , '650.123.2234'
+        , TO_DATE('10-APR-1997', 'dd-MON-yyyy')
+        , 'ST_MAN'
+        , 8200
+        , NULL
+        , 100
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 122
+        , 'Payam'
+        , 'Kaufling'
+        , 'PKAUFLIN'
+        , '650.123.3234'
+        , TO_DATE('01-MAY-1995', 'dd-MON-yyyy')
+        , 'ST_MAN'
+        , 7900
+        , NULL
+        , 100
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 123
+        , 'Shanta'
+        , 'Vollman'
+        , 'SVOLLMAN'
+        , '650.123.4234'
+        , TO_DATE('10-OCT-1997', 'dd-MON-yyyy')
+        , 'ST_MAN'
+        , 6500
+        , NULL
+        , 100
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 124
+        , 'Kevin'
+        , 'Mourgos'
+        , 'KMOURGOS'
+        , '650.123.5234'
+        , TO_DATE('16-NOV-1999', 'dd-MON-yyyy')
+        , 'ST_MAN'
+        , 5800
+        , NULL
+        , 100
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 125
+        , 'Julia'
+        , 'Nayer'
+        , 'JNAYER'
+        , '650.124.1214'
+        , TO_DATE('16-JUL-1997', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3200
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 126
+        , 'Irene'
+        , 'Mikkilineni'
+        , 'IMIKKILI'
+        , '650.124.1224'
+        , TO_DATE('28-SEP-1998', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2700
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 127
+        , 'James'
+        , 'Landry'
+        , 'JLANDRY'
+        , '650.124.1334'
+        , TO_DATE('14-JAN-1999', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2400
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 128
+        , 'Steven'
+        , 'Markle'
+        , 'SMARKLE'
+        , '650.124.1434'
+        , TO_DATE('08-MAR-2000', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2200
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 129
+        , 'Laura'
+        , 'Bissot'
+        , 'LBISSOT'
+        , '650.124.5234'
+        , TO_DATE('20-AUG-1997', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3300
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 130
+        , 'Mozhe'
+        , 'Atkinson'
+        , 'MATKINSO'
+        , '650.124.6234'
+        , TO_DATE('30-OCT-1997', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2800
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 131
+        , 'James'
+        , 'Marlow'
+        , 'JAMRLOW'
+        , '650.124.7234'
+        , TO_DATE('16-FEB-1997', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2500
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 132
+        , 'TJ'
+        , 'Olson'
+        , 'TJOLSON'
+        , '650.124.8234'
+        , TO_DATE('10-APR-1999', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2100
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 133
+        , 'Jason'
+        , 'Mallin'
+        , 'JMALLIN'
+        , '650.127.1934'
+        , TO_DATE('14-JUN-1996', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3300
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 134
+        , 'Michael'
+        , 'Rogers'
+        , 'MROGERS'
+        , '650.127.1834'
+        , TO_DATE('26-AUG-1998', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2900
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 135
+        , 'Ki'
+        , 'Gee'
+        , 'KGEE'
+        , '650.127.1734'
+        , TO_DATE('12-DEC-1999', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2400
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 136
+        , 'Hazel'
+        , 'Philtanker'
+        , 'HPHILTAN'
+        , '650.127.1634'
+        , TO_DATE('06-FEB-2000', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2200
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 137
+        , 'Renske'
+        , 'Ladwig'
+        , 'RLADWIG'
+        , '650.121.1234'
+        , TO_DATE('14-JUL-1995', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3600
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 138
+        , 'Stephen'
+        , 'Stiles'
+        , 'SSTILES'
+        , '650.121.2034'
+        , TO_DATE('26-OCT-1997', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3200
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 139
+        , 'John'
+        , 'Seo'
+        , 'JSEO'
+        , '650.121.2019'
+        , TO_DATE('12-FEB-1998', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2700
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 140
+        , 'Joshua'
+        , 'Patel'
+        , 'JPATEL'
+        , '650.121.1834'
+        , TO_DATE('06-APR-1998', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2500
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 141
+        , 'Trenna'
+        , 'Rajs'
+        , 'TRAJS'
+        , '650.121.8009'
+        , TO_DATE('17-OCT-1995', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3500
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 142
+        , 'Curtis'
+        , 'Davies'
+        , 'CDAVIES'
+        , '650.121.2994'
+        , TO_DATE('29-JAN-1997', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 3100
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 143
+        , 'Randall'
+        , 'Matos'
+        , 'RMATOS'
+        , '650.121.2874'
+        , TO_DATE('15-MAR-1998', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2600
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 144
+        , 'Peter'
+        , 'Vargas'
+        , 'PVARGAS'
+        , '650.121.2004'
+        , TO_DATE('09-JUL-1998', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 2500
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 145
+        , 'John'
+        , 'Russell'
+        , 'JRUSSEL'
+        , '011.44.1344.429268'
+        , TO_DATE('01-OCT-1996', 'dd-MON-yyyy')
+        , 'SA_MAN'
+        , 14000
+        , .4
+        , 100
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 146
+        , 'Karen'
+        , 'Partners'
+        , 'KPARTNER'
+        , '011.44.1344.467268'
+        , TO_DATE('05-JAN-1997', 'dd-MON-yyyy')
+        , 'SA_MAN'
+        , 13500
+        , .3
+        , 100
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 147
+        , 'Alberto'
+        , 'Errazuriz'
+        , 'AERRAZUR'
+        , '011.44.1344.429278'
+        , TO_DATE('10-MAR-1997', 'dd-MON-yyyy')
+        , 'SA_MAN'
+        , 12000
+        , .3
+        , 100
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 148
+        , 'Gerald'
+        , 'Cambrault'
+        , 'GCAMBRAU'
+        , '011.44.1344.619268'
+        , TO_DATE('15-OCT-1999', 'dd-MON-yyyy')
+        , 'SA_MAN'
+        , 11000
+        , .3
+        , 100
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 149
+        , 'Eleni'
+        , 'Zlotkey'
+        , 'EZLOTKEY'
+        , '011.44.1344.429018'
+        , TO_DATE('29-JAN-2000', 'dd-MON-yyyy')
+        , 'SA_MAN'
+        , 10500
+        , .2
+        , 100
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 150
+        , 'Peter'
+        , 'Tucker'
+        , 'PTUCKER'
+        , '011.44.1344.129268'
+        , TO_DATE('30-JAN-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 10000
+        , .3
+        , 145
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 151
+        , 'David'
+        , 'Bernstein'
+        , 'DBERNSTE'
+        , '011.44.1344.345268'
+        , TO_DATE('24-MAR-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 9500
+        , .25
+        , 145
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 152
+        , 'Peter'
+        , 'Hall'
+        , 'PHALL'
+        , '011.44.1344.478968'
+        , TO_DATE('20-AUG-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 9000
+        , .25
+        , 145
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 153
+        , 'Christopher'
+        , 'Olsen'
+        , 'COLSEN'
+        , '011.44.1344.498718'
+        , TO_DATE('30-MAR-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 8000
+        , .2
+        , 145
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 154
+        , 'Nanette'
+        , 'Cambrault'
+        , 'NCAMBRAU'
+        , '011.44.1344.987668'
+        , TO_DATE('09-DEC-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7500
+        , .2
+        , 145
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 155
+        , 'Oliver'
+        , 'Tuvault'
+        , 'OTUVAULT'
+        , '011.44.1344.486508'
+        , TO_DATE('23-NOV-1999', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7000
+        , .15
+        , 145
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 156
+        , 'Janette'
+        , 'King'
+        , 'JKING'
+        , '011.44.1345.429268'
+        , TO_DATE('30-JAN-1996', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 10000
+        , .35
+        , 146
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 157
+        , 'Patrick'
+        , 'Sully'
+        , 'PSULLY'
+        , '011.44.1345.929268'
+        , TO_DATE('04-MAR-1996', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 9500
+        , .35
+        , 146
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 158
+        , 'Allan'
+        , 'McEwen'
+        , 'AMCEWEN'
+        , '011.44.1345.829268'
+        , TO_DATE('01-AUG-1996', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 9000
+        , .35
+        , 146
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 159
+        , 'Lindsey'
+        , 'Smith'
+        , 'LSMITH'
+        , '011.44.1345.729268'
+        , TO_DATE('10-MAR-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 8000
+        , .3
+        , 146
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 160
+        , 'Louise'
+        , 'Doran'
+        , 'LDORAN'
+        , '011.44.1345.629268'
+        , TO_DATE('15-DEC-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7500
+        , .3
+        , 146
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 161
+        , 'Sarath'
+        , 'Sewall'
+        , 'SSEWALL'
+        , '011.44.1345.529268'
+        , TO_DATE('03-NOV-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7000
+        , .25
+        , 146
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 162
+        , 'Clara'
+        , 'Vishney'
+        , 'CVISHNEY'
+        , '011.44.1346.129268'
+        , TO_DATE('11-NOV-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 10500
+        , .25
+        , 147
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 163
+        , 'Danielle'
+        , 'Greene'
+        , 'DGREENE'
+        , '011.44.1346.229268'
+        , TO_DATE('19-MAR-1999', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 9500
+        , .15
+        , 147
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 164
+        , 'Mattea'
+        , 'Marvins'
+        , 'MMARVINS'
+        , '011.44.1346.329268'
+        , TO_DATE('24-JAN-2000', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7200
+        , .10
+        , 147
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 165
+        , 'David'
+        , 'Lee'
+        , 'DLEE'
+        , '011.44.1346.529268'
+        , TO_DATE('23-FEB-2000', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 6800
+        , .1
+        , 147
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 166
+        , 'Sundar'
+        , 'Ande'
+        , 'SANDE'
+        , '011.44.1346.629268'
+        , TO_DATE('24-MAR-2000', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 6400
+        , .10
+        , 147
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 167
+        , 'Amit'
+        , 'Banda'
+        , 'ABANDA'
+        , '011.44.1346.729268'
+        , TO_DATE('21-APR-2000', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 6200
+        , .10
+        , 147
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 168
+        , 'Lisa'
+        , 'Ozer'
+        , 'LOZER'
+        , '011.44.1343.929268'
+        , TO_DATE('11-MAR-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 11500
+        , .25
+        , 148
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 169  
+        , 'Harrison'
+        , 'Bloom'
+        , 'HBLOOM'
+        , '011.44.1343.829268'
+        , TO_DATE('23-MAR-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 10000
+        , .20
+        , 148
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 170
+        , 'Tayler'
+        , 'Fox'
+        , 'TFOX'
+        , '011.44.1343.729268'
+        , TO_DATE('24-JAN-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 9600
+        , .20
+        , 148
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 171
+        , 'William'
+        , 'Smith'
+        , 'WSMITH'
+        , '011.44.1343.629268'
+        , TO_DATE('23-FEB-1999', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7400
+        , .15
+        , 148
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 172
+        , 'Elizabeth'
+        , 'Bates'
+        , 'EBATES'
+        , '011.44.1343.529268'
+        , TO_DATE('24-MAR-1999', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7300
+        , .15
+        , 148
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 173
+        , 'Sundita'
+        , 'Kumar'
+        , 'SKUMAR'
+        , '011.44.1343.329268'
+        , TO_DATE('21-APR-2000', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 6100
+        , .10
+        , 148
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 174
+        , 'Ellen'
+        , 'Abel'
+        , 'EABEL'
+        , '011.44.1644.429267'
+        , TO_DATE('11-MAY-1996', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 11000
+        , .30
+        , 149
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 175
+        , 'Alyssa'
+        , 'Hutton'
+        , 'AHUTTON'
+        , '011.44.1644.429266'
+        , TO_DATE('19-MAR-1997', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 8800
+        , .25
+        , 149
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 176
+        , 'Jonathon'
+        , 'Taylor'
+        , 'JTAYLOR'
+        , '011.44.1644.429265'
+        , TO_DATE('24-MAR-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 8600
+        , .20
+        , 149
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 177
+        , 'Jack'
+        , 'Livingston'
+        , 'JLIVINGS'
+        , '011.44.1644.429264'
+        , TO_DATE('23-APR-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 8400
+        , .20
+        , 149
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 178
+        , 'Kimberely'
+        , 'Grant'
+        , 'KGRANT'
+        , '011.44.1644.429263'
+        , TO_DATE('24-MAY-1999', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 7000
+        , .15
+        , 149
+        , NULL
+        );
+
+INSERT INTO employees VALUES 
+        ( 179
+        , 'Charles'
+        , 'Johnson'
+        , 'CJOHNSON'
+        , '011.44.1644.429262'
+        , TO_DATE('04-JAN-2000', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 6200
+        , .10
+        , 149
+        , 80
+        );
+
+INSERT INTO employees VALUES 
+        ( 180
+        , 'Winston'
+        , 'Taylor'
+        , 'WTAYLOR'
+        , '650.507.9876'
+        , TO_DATE('24-JAN-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3200
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 181
+        , 'Jean'
+        , 'Fleaur'
+        , 'JFLEAUR'
+        , '650.507.9877'
+        , TO_DATE('23-FEB-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3100
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 182
+        , 'Martha'
+        , 'Sullivan'
+        , 'MSULLIVA'
+        , '650.507.9878'
+        , TO_DATE('21-JUN-1999', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2500
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 183
+        , 'Girard'
+        , 'Geoni'
+        , 'GGEONI'
+        , '650.507.9879'
+        , TO_DATE('03-FEB-2000', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2800
+        , NULL
+        , 120
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 184
+        , 'Nandita'
+        , 'Sarchand'
+        , 'NSARCHAN'
+        , '650.509.1876'
+        , TO_DATE('27-JAN-1996', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 4200
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 185
+        , 'Alexis'
+        , 'Bull'
+        , 'ABULL'
+        , '650.509.2876'
+        , TO_DATE('20-FEB-1997', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 4100
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 186
+        , 'Julia'
+        , 'Dellinger'
+        , 'JDELLING'
+        , '650.509.3876'
+        , TO_DATE('24-JUN-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3400
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 187
+        , 'Anthony'
+        , 'Cabrio'
+        , 'ACABRIO'
+        , '650.509.4876'
+        , TO_DATE('07-FEB-1999', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3000
+        , NULL
+        , 121
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 188
+        , 'Kelly'
+        , 'Chung'
+        , 'KCHUNG'
+        , '650.505.1876'
+        , TO_DATE('14-JUN-1997', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3800
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 189
+        , 'Jennifer'
+        , 'Dilly'
+        , 'JDILLY'
+        , '650.505.2876'
+        , TO_DATE('13-AUG-1997', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3600
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 190
+        , 'Timothy'
+        , 'Gates'
+        , 'TGATES'
+        , '650.505.3876'
+        , TO_DATE('11-JUL-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2900
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 191
+        , 'Randall'
+        , 'Perkins'
+        , 'RPERKINS'
+        , '650.505.4876'
+        , TO_DATE('19-DEC-1999', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2500
+        , NULL
+        , 122
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 192
+        , 'Sarah'
+        , 'Bell'
+        , 'SBELL'
+        , '650.501.1876'
+        , TO_DATE('04-FEB-1996', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 4000
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 193
+        , 'Britney'
+        , 'Everett'
+        , 'BEVERETT'
+        , '650.501.2876'
+        , TO_DATE('03-MAR-1997', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3900
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 194
+        , 'Samuel'
+        , 'McCain'
+        , 'SMCCAIN'
+        , '650.501.3876'
+        , TO_DATE('01-JUL-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3200
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 195
+        , 'Vance'
+        , 'Jones'
+        , 'VJONES'
+        , '650.501.4876'
+        , TO_DATE('17-MAR-1999', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2800
+        , NULL
+        , 123
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 196
+        , 'Alana'
+        , 'Walsh'
+        , 'AWALSH'
+        , '650.507.9811'
+        , TO_DATE('24-APR-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3100
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 197
+        , 'Kevin'
+        , 'Feeney'
+        , 'KFEENEY'
+        , '650.507.9822'
+        , TO_DATE('23-MAY-1998', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 3000
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 198
+        , 'Donald'
+        , 'OConnell'
+        , 'DOCONNEL'
+        , '650.507.9833'
+        , TO_DATE('21-JUN-1999', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2600
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 199
+        , 'Douglas'
+        , 'Grant'
+        , 'DGRANT'
+        , '650.507.9844'
+        , TO_DATE('13-JAN-2000', 'dd-MON-yyyy')
+        , 'SH_CLERK'
+        , 2600
+        , NULL
+        , 124
+        , 50
+        );
+
+INSERT INTO employees VALUES 
+        ( 200
+        , 'Jennifer'
+        , 'Whalen'
+        , 'JWHALEN'
+        , '515.123.4444'
+        , TO_DATE('17-SEP-1987', 'dd-MON-yyyy')
+        , 'AD_ASST'
+        , 4400
+        , NULL
+        , 101
+        , 10
+        );
+
+INSERT INTO employees VALUES 
+        ( 201
+        , 'Michael'
+        , 'Hartstein'
+        , 'MHARTSTE'
+        , '515.123.5555'
+        , TO_DATE('17-FEB-1996', 'dd-MON-yyyy')
+        , 'MK_MAN'
+        , 13000
+        , NULL
+        , 100
+        , 20
+        );
+
+INSERT INTO employees VALUES 
+        ( 202
+        , 'Pat'
+        , 'Fay'
+        , 'PFAY'
+        , '603.123.6666'
+        , TO_DATE('17-AUG-1997', 'dd-MON-yyyy')
+        , 'MK_REP'
+        , 6000
+        , NULL
+        , 201
+        , 20
+        );
+
+INSERT INTO employees VALUES 
+        ( 203
+        , 'Susan'
+        , 'Mavris'
+        , 'SMAVRIS'
+        , '515.123.7777'
+        , TO_DATE('07-JUN-1994', 'dd-MON-yyyy')
+        , 'HR_REP'
+        , 6500
+        , NULL
+        , 101
+        , 40
+        );
+
+INSERT INTO employees VALUES 
+        ( 204
+        , 'Hermann'
+        , 'Baer'
+        , 'HBAER'
+        , '515.123.8888'
+        , TO_DATE('07-JUN-1994', 'dd-MON-yyyy')
+        , 'PR_REP'
+        , 10000
+        , NULL
+        , 101
+        , 70
+        );
+
+INSERT INTO employees VALUES 
+        ( 205
+        , 'Shelley'
+        , 'Higgins'
+        , 'SHIGGINS'
+        , '515.123.8080'
+        , TO_DATE('07-JUN-1994', 'dd-MON-yyyy')
+        , 'AC_MGR'
+        , 12000
+        , NULL
+        , 101
+        , 110
+        );
+
+INSERT INTO employees VALUES 
+        ( 206
+        , 'William'
+        , 'Gietz'
+        , 'WGIETZ'
+        , '515.123.8181'
+        , TO_DATE('07-JUN-1994', 'dd-MON-yyyy')
+        , 'AC_ACCOUNT'
+        , 8300
+        , NULL
+        , 205
+        , 110
+        );
+
+INSERT INTO job_history
+VALUES (102
+       , TO_DATE('13-JAN-1993', 'dd-MON-yyyy')
+       , TO_DATE('24-JUL-1998', 'dd-MON-yyyy')
+       , 'IT_PROG'
+       , 60);
+
+INSERT INTO job_history
+VALUES (101
+       , TO_DATE('21-SEP-1989', 'dd-MON-yyyy')
+       , TO_DATE('27-OCT-1993', 'dd-MON-yyyy')
+       , 'AC_ACCOUNT'
+       , 110);
+
+INSERT INTO job_history
+VALUES (101
+       , TO_DATE('28-OCT-1993', 'dd-MON-yyyy')
+       , TO_DATE('15-MAR-1997', 'dd-MON-yyyy')
+       , 'AC_MGR'
+       , 110);
+
+INSERT INTO job_history
+VALUES (201
+       , TO_DATE('17-FEB-1996', 'dd-MON-yyyy')
+       , TO_DATE('19-DEC-1999', 'dd-MON-yyyy')
+       , 'MK_REP'
+       , 20);
+
+INSERT INTO job_history
+VALUES  (114
+        , TO_DATE('24-MAR-1998', 'dd-MON-yyyy')
+        , TO_DATE('31-DEC-1999', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 50
+        );
+
+INSERT INTO job_history
+VALUES  (122
+        , TO_DATE('01-JAN-1999', 'dd-MON-yyyy')
+        , TO_DATE('31-DEC-1999', 'dd-MON-yyyy')
+        , 'ST_CLERK'
+        , 50
+        );
+
+INSERT INTO job_history
+VALUES  (200
+        , TO_DATE('17-SEP-1987', 'dd-MON-yyyy')
+        , TO_DATE('17-JUN-1993', 'dd-MON-yyyy')
+        , 'AD_ASST'
+        , 90
+        );
+
+INSERT INTO job_history
+VALUES  (176
+        , TO_DATE('24-MAR-1998', 'dd-MON-yyyy')
+        , TO_DATE('31-DEC-1998', 'dd-MON-yyyy')
+        , 'SA_REP'
+        , 80
+        );
+
+INSERT INTO job_history
+VALUES  (176
+        , TO_DATE('01-JAN-1999', 'dd-MON-yyyy')
+        , TO_DATE('31-DEC-1999', 'dd-MON-yyyy')
+        , 'SA_MAN'
+        , 80
+        );
+
+INSERT INTO job_history
+VALUES  (200
+        , TO_DATE('01-JUL-1994', 'dd-MON-yyyy')
+        , TO_DATE('31-DEC-1998', 'dd-MON-yyyy')
+        , 'AC_ACCOUNT'
+        , 90
+        );
+
+
+
+ALTER TABLE departments 
+  ENABLE CONSTRAINT dept_mgr_fk;
+
+COMMIT;
+
+
+
+SET FEEDBACK 1
+SET NUMWIDTH 10
+SET LINESIZE 80
+SET TRIMSPOOL ON
+SET TAB OFF
+SET PAGESIZE 100
+SET ECHO OFF 
+
+CREATE INDEX emp_department_ix
+       ON employees (department_id);
+
+CREATE INDEX emp_job_ix
+       ON employees (job_id);
+
+CREATE INDEX emp_manager_ix
+       ON employees (manager_id);
+
+CREATE INDEX emp_name_ix
+       ON employees (last_name, first_name);
+
+CREATE INDEX dept_location_ix
+       ON departments (location_id);
+
+CREATE INDEX jhist_job_ix
+       ON job_history (job_id);
+
+CREATE INDEX jhist_employee_ix
+       ON job_history (employee_id);
+
+CREATE INDEX jhist_department_ix
+       ON job_history (department_id);
+
+CREATE INDEX loc_city_ix
+       ON locations (city);
+
+CREATE INDEX loc_state_province_ix	
+       ON locations (state_province);
+
+CREATE INDEX loc_country_ix
+       ON locations (country_id);
+
+COMMIT;
 
 
 
 
 
+SET FEEDBACK 1
+SET NUMWIDTH 10
+SET LINESIZE 80
+SET TRIMSPOOL ON
+SET TAB OFF
+SET PAGESIZE 100
+SET ECHO OFF
+
+
+CREATE OR REPLACE PROCEDURE secure_dml
+IS
+BEGIN
+  IF TO_CHAR (SYSDATE, 'HH24:MI') NOT BETWEEN '08:00' AND '18:00'
+        OR TO_CHAR (SYSDATE, 'DY') IN ('SAT', 'SUN') THEN
+	RAISE_APPLICATION_ERROR (-20205, 
+		'You may only make changes during normal office hours');
+  END IF;
+END secure_dml;
+/
+
+CREATE OR REPLACE TRIGGER secure_employees
+  BEFORE INSERT OR UPDATE OR DELETE ON employees
+BEGIN
+  secure_dml;
+END secure_employees;
+/
+
+CREATE OR REPLACE PROCEDURE add_job_history
+  (  p_emp_id          job_history.employee_id%type
+   , p_start_date      job_history.start_date%type
+   , p_end_date        job_history.end_date%type
+   , p_job_id          job_history.job_id%type
+   , p_department_id   job_history.department_id%type 
+   )
+IS
+BEGIN
+  INSERT INTO job_history (employee_id, start_date, end_date, 
+                           job_id, department_id)
+    VALUES(p_emp_id, p_start_date, p_end_date, p_job_id, p_department_id);
+END add_job_history;
+/
+
+CREATE OR REPLACE TRIGGER update_job_history
+  AFTER UPDATE OF job_id, department_id ON employees
+  FOR EACH ROW
+BEGIN
+  add_job_history(:old.employee_id, :old.hire_date, sysdate, 
+                  :old.job_id, :old.department_id);
+END;
+/
+
+COMMIT;
 
 
 
 
 
+SET FEEDBACK 1
+SET NUMWIDTH 10
+SET LINESIZE 80
+SET TRIMSPOOL ON
+SET TAB OFF
+SET PAGESIZE 100
+SET ECHO OFF 
+
+COMMENT ON TABLE regions 
+IS 'Regions table that contains region numbers and names. Contains 4 rows; references with the Countries table.';
+
+COMMENT ON COLUMN regions.region_id
+IS 'Primary key of regions table.';
+
+COMMENT ON COLUMN regions.region_name
+IS 'Names of regions. Locations are in the countries of these regions.';
+
+COMMENT ON TABLE locations
+IS 'Locations table that contains specific address of a specific office,
+warehouse, and/or production site of a company. Does not store addresses /
+locations of customers. Contains 23 rows; references with the
+departments and countries tables. ';
+
+COMMENT ON COLUMN locations.location_id
+IS 'Primary key of locations table';
+
+COMMENT ON COLUMN locations.street_address
+IS 'Street address of an office, warehouse, or production site of a company.
+Contains building number and street name';
+
+COMMENT ON COLUMN locations.postal_code
+IS 'Postal code of the location of an office, warehouse, or production site 
+of a company. ';
+
+COMMENT ON COLUMN locations.city
+IS 'A not null column that shows city where an office, warehouse, or 
+production site of a company is located. ';
+
+COMMENT ON COLUMN locations.state_province
+IS 'State or Province where an office, warehouse, or production site of a 
+company is located.';
+
+COMMENT ON COLUMN locations.country_id
+IS 'Country where an office, warehouse, or production site of a company is
+located. Foreign key to country_id column of the countries table.';
+
+
+COMMENT ON TABLE departments
+IS 'Departments table that shows details of departments where employees 
+work. Contains 27 rows; references with locations, employees, and job_history tables.';
+
+COMMENT ON COLUMN departments.department_id
+IS 'Primary key column of departments table.';
+
+COMMENT ON COLUMN departments.department_name
+IS 'A not null column that shows name of a department. Administration, 
+Marketing, Purchasing, Human Resources, Shipping, IT, Executive, Public 
+Relations, Sales, Finance, and Accounting. ';
+
+COMMENT ON COLUMN departments.manager_id
+IS 'Manager_id of a department. Foreign key to employee_id column of employees table. The manager_id column of the employee table references this column.';
+
+COMMENT ON COLUMN departments.location_id
+IS 'Location id where a department is located. Foreign key to location_id column of locations table.';
+
+
+COMMENT ON TABLE job_history
+IS 'Table that stores job history of the employees. If an employee 
+changes departments within the job or changes jobs within the department, 
+new rows get inserted into this table with old job information of the 
+employee. Contains a complex primary key: employee_id+start_date.
+Contains 25 rows. References with jobs, employees, and departments tables.';
+
+COMMENT ON COLUMN job_history.employee_id
+IS 'A not null column in the complex primary key employee_id+start_date.
+Foreign key to employee_id column of the employee table';
+
+COMMENT ON COLUMN job_history.start_date
+IS 'A not null column in the complex primary key employee_id+start_date. 
+Must be less than the end_date of the job_history table. (enforced by 
+constraint jhist_date_interval)';
+
+COMMENT ON COLUMN job_history.end_date
+IS 'Last day of the employee in this job role. A not null column. Must be 
+greater than the start_date of the job_history table. 
+(enforced by constraint jhist_date_interval)';
+
+COMMENT ON COLUMN job_history.job_id
+IS 'Job role in which the employee worked in the past; foreign key to 
+job_id column in the jobs table. A not null column.';
+
+COMMENT ON COLUMN job_history.department_id
+IS 'Department id in which the employee worked in the past; foreign key to deparment_id column in the departments table';
+
+
+COMMENT ON TABLE countries
+IS 'country table. Contains 25 rows. References with locations table.';
+
+COMMENT ON COLUMN countries.country_id
+IS 'Primary key of countries table.';
+
+COMMENT ON COLUMN countries.country_name
+IS 'Country name';
+
+COMMENT ON COLUMN countries.region_id
+IS 'Region ID for the country. Foreign key to region_id column in the departments table.';
+
+COMMENT ON TABLE jobs
+IS 'jobs table with job titles and salary ranges. Contains 19 rows.
+References with employees and job_history table.';
+
+COMMENT ON COLUMN jobs.job_id
+IS 'Primary key of jobs table.';
+
+COMMENT ON COLUMN jobs.job_title
+IS 'A not null column that shows job title, e.g. AD_VP, FI_ACCOUNTANT';
+
+COMMENT ON COLUMN jobs.min_salary
+IS 'Minimum salary for a job title.';
+
+COMMENT ON COLUMN jobs.max_salary
+IS 'Maximum salary for a job title';
+
+COMMENT ON TABLE employees
+IS 'employees table. Contains 107 rows. References with departments, 
+jobs, job_history tables. Contains a self reference.';
+
+COMMENT ON COLUMN employees.employee_id
+IS 'Primary key of employees table.';
+
+COMMENT ON COLUMN employees.first_name
+IS 'First name of the employee. A not null column.';
+
+COMMENT ON COLUMN employees.last_name
+IS 'Last name of the employee. A not null column.';
+
+COMMENT ON COLUMN employees.email
+IS 'Email id of the employee';
+
+COMMENT ON COLUMN employees.phone_number
+IS 'Phone number of the employee; includes country code and area code';
+
+COMMENT ON COLUMN employees.hire_date
+IS 'Date when the employee started on this job. A not null column.';
+
+COMMENT ON COLUMN employees.job_id
+IS 'Current job of the employee; foreign key to job_id column of the 
+jobs table. A not null column.';
+
+COMMENT ON COLUMN employees.salary
+IS 'Monthly salary of the employee. Must be greater 
+than zero (enforced by constraint emp_salary_min)';
+
+COMMENT ON COLUMN employees.commission_pct
+IS 'Commission percentage of the employee; Only employees in sales 
+department elgible for commission percentage';
+
+COMMENT ON COLUMN employees.manager_id
+IS 'Manager id of the employee; has same domain as manager_id in 
+departments table. Foreign key to employee_id column of employees table.
+(useful for reflexive joins and CONNECT BY query)';
+
+COMMENT ON COLUMN employees.department_id
+IS 'Department id where employee works; foreign key to department_id 
+column of the departments table';
+
+COMMIT;
 
 
 
 
 
+ALTER TABLE departments
+DISABLE CONSTRAINT DEPT_MGR_FK;
+
+ALTER TABLE job_history
+DISABLE CONSTRAINT JHIST_EMP_FK;
+
+DROP TRIGGER secure_employees;
+
+DROP TRIGGER update_job_history;
+
+DROP PROCEDURE add_job_history;
+
+DROP PROCEDURE secure_dml;
+
+--DELETE FROM employees
+--WHERE manager_id IN (108, 114, 120, 121, 122, 123, 145, 146, 147, 148);
+--
+--DELETE FROM employees
+--WHERE employee_id IN (114, 120, 121, 122, 123, 145, 146, 147, 148, 
+--                      196, 197, 198, 199, 105, 106, 108, 175, 177, 
+--                      179, 203, 204);
+
+--DELETE FROM locations
+--WHERE location_id NOT IN 
+--  (SELECT DISTINCT location_id
+--   FROM departments);
+--
+--DELETE FROM countries
+--WHERE country_id NOT IN
+--  (SELECT country_id
+--   FROM locations);
+--
+--DELETE FROM jobs
+--WHERE job_id NOT IN
+--  (SELECT job_id
+--   FROM employees);
+--
+--DELETE FROM departments
+--WHERE department_id NOT IN 
+--  (SELECT DISTINCT department_id
+--   FROM employees
+--   WHERE department_id IS NOT NULL);
+--
+--UPDATE departments
+--SET manager_id = 124
+--WHERE department_id = 50;
+--
+--UPDATE departments
+--SET manager_id = 149
+--WHERE department_id = 80;
+--
+--DELETE FROM locations
+--WHERE location_id IN (2700, 2400);
+--
+--UPDATE locations
+--SET street_address = '460 Bloor St. W.', 
+--    postal_code = 'ON M5S 1X8'
+--WHERE location_id = 1800;
+
+ALTER TABLE departments
+ENABLE CONSTRAINT DEPT_MGR_FK;
+
+CREATE TABLE job_grades
+(grade_level VARCHAR2(3),
+ lowest_sal  NUMBER,
+ highest_sal NUMBER);
+
+INSERT INTO job_grades
+VALUES ('A', 1000, 2999);
+
+INSERT INTO job_grades
+VALUES ('B', 3000, 5999);
+
+INSERT INTO job_grades
+VALUES('C', 6000, 9999);
+
+INSERT INTO job_grades
+VALUES('D', 10000, 14999);
+
+INSERT INTO job_grades
+VALUES('E', 15000, 24999);
+
+INSERT INTO job_grades
+VALUES('F', 25000, 40000);
+
+--INSERT INTO departments VALUES 
+--        ( 190 
+--        , 'Contracting'
+--        , NULL
+--        , 1700
+--        );
+
+COMMIT;
+
+select count(*) NUM_EMP from employees;
+select count(*) NUM_DEP from departments;
+select count(*) NUM_LOC from locations;
+select count(*) NUM_REG from regions;
+select count(*) NUM_CTR from countries;
+select count(*) NUM_JOB from jobs;
+select count(*) NUM_JH from job_history;
 
 
+
+
+select * from employees;
+
+-- Simth ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸ì™€ ì´ë¦„(last_name)ì„ ì¡°íšŒ
+select employee_id, employee_name from employees where last_name='Smith';
+
+-- ë³„ì¹­(alias)ì‚¬ìš©
+select employee_id "ì‚¬ì›ë²ˆí˜¸", salary "ê¸‰ì—¬" from employees where name='Simth';
+
+select employee_id as "ì‚¬ì›ë²ˆí˜¸", salary as "ê¸‰ì—¬" from employees where last_name = 'Simth';
+
+-- distnctë¥¼ ì‚¬ìš©í•œ ì¤‘ë³µ ì œê±°
+select job_id from employees; 
+
+select distinct job_id from employees;
+
+-- ê¸‰ì—¬ê°€ 5000ì´ìƒì¸ ì‚¬ì›ì˜ ì„±, ì´ë¦„, ê¸‰ì—¬ ì¡°íšŒ
+select last_name, first_name, salary from employees where salary >= 5000;
+
+-- 1994ë…„ 1ì–¼ 1ì¼ ì´í›„ì— ì…ì‚¬í•œ ì‚¬ì›ë§Œ ì‚¬ì›ì˜ ì„±, ì´ë¦„, ì…ì‚¬ë‚ ì§œë¥¼ ì¡°íšŒ
+select last_name, first_name, hire_date from employees where hire_date >= '94/01/01';
+
+-- and ì—°ì‚°ì ì‚¬ìš©
+-- 50ë²ˆ ë¶€ì„œì˜ ì‚¬ì›ì¤‘ì—ì„œ ì§ì—…ì´ 'SH_CLERK'ì¸ ì‚¬ì›ì˜ ì„±, ì´ë¦„, ,ì§ì—…ID, ë¶€ì„œIDë¥¼ ì¡°íšŒ
+select last_name, first_name, job_id, department_id from employees where job_id = 'SH_CLERK' and department_id = 50;
+
+-- or ì—°ì‚°ì ì‚¬ìš©
+-- ë¶€ì„œë²ˆí˜¸ê°€ 50ë²ˆ ì´ê±°ë‚˜, ìƒì‚¬IDê°€ 100ì¸ ì‚¬ì›ì˜ ì´ë¦„, ì„±, ë§¤ë‹ˆì €ID, ë¶€ì„œIDë¥¼ ì¡°íšŒ
+select last_name, first_name, manager_id, department_id from employees where department_id = 50 or manager_id = 100;
+
+-- not ì—°ì‚°ì ì‚¬ìš©
+-- 50ë²ˆ ë¶€ì„œê°€ ì•„ë‹Œ ì‚¬ì›ë“¤ì˜ ì´ë¦„, ì„±, ì§ì—…, ë¶€ì„œë²ˆí˜¸ë¥¼ ì¡°íšŒ
+select * from employees where not department_id = 50;
+-- where department_id <> 50;/ != / ^=
+
+-- ê¸‰ì—¬ë¥¼ 4000 ì´ìƒ, 8000 ì´í•˜ì¸ ì‚¬ì›ë“¤ì˜ ì´ë¦„, ì„±, ê¸‰ì—¬ ì¡°íšŒ
+select last_name, first_name, salary from employees where salary between 4000 and 8000;
+-- where salary >= 4000 and salary <= 8000;
+
+-- ê¸‰ì—¬ê°€ 6500, 7700, 13000ì¸ ì‚¬ì›ë“¤ì˜ ì´ë¦„, ì„±, ê¸‰ì—¬ ì¡°íšŒ
+select last_name, first_name, salary from employees where salary=6500 or salary=7700 or salary=13000;
+-- where salary in (6500, 7700, 1300);
+
+-- ì´ë¦„ì´ Dë¡œ ì‹œì‘í•˜ëŠ” ì‚¬ì›ì˜ ì´ë¦„, ì„±, ì§ì—… ì¡°íšŒ
+select last_name, first_name, job_id from employees where last_name like 'D%';
+select last_name, first_name, job_id from employees where last_name like 'D____';
+
+-- ë³´ë„ˆìŠ¤ë¥¼ ë°›ì§€ ì•ŠëŠ” ì‚¬ì›ì˜ ì´ë¦„, ì„±, ë³´ë„ˆìŠ¤ ì¡°íšŒ
+select last_name, first_name, commission_pct from employees where commission_pct is null;
+
+-- ì •ë ¬(order by): asc(ì˜¤ë¦„ì°¨ìˆœ), desc(ë‚´ë¦¼ì°¨ìˆœ)
+-- ì‚¬ì›ë²ˆí˜¸ê°€ ì ì€ ìˆœì„œëŒ€ë¡œ ì‚¬ì›ë²ˆí˜¸ì™€ ì´ë¦„, ì„±ì„ ì¡°íšŒ
+select last_name, first_name from employees order by employee_id;
+
+-- ì›”ê¸‰ì„ ë§ì´ ë°›ëŠ” ìˆœì„œëŒ€ë¡œ ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ì„±, ê¸‰ì—¬, ì§ì—…, ë¶€ì„œë²ˆí˜¸ ì¡°íšŒ
+select last_name, first_name, salary, job_id, department_id from employees order by salary desc;
+
+-- ì§‘ê³„(=ê·¸ë£¹) í•¨ìˆ˜: sum, avg, count, max, min
+select count(first_name), trunc(avg(salary)), sum(salary), max(salary), min(salary) from employees;
+
+select count(*) from employees; -- ëª¨ë“ ê²ƒ
+select count(commission_pct) from employees; -- nullì€ ì¹´ìš´íŠ¸ ì•ˆí•¨
+select count(first_name), count(distinct first_name) from employees; -- distince ì¤‘ë³µ ì œê±°
+select avg(salary) from employees;
+select count(*) from employees where department_id = 80;
+
+-- 80ë²ˆ ë¶€ì„œì—ì„œ ê°€ì¥ ê¸‰ì—¬ê°€ ë†’ì€ ì‚¬ì›ì¡°íšŒ
+select max(salary) from employees where department_id = 80;
+-- 80ë²ˆ ë¶€ì„œì—ì„œ ê°€ì¥ ê¸‰ì—¬ê°€ ì‘ì€ ì‚¬ì› ì¡°íšŒ
+select min(salary) from employees where department_id = 80;
+
+-- ê°€ì¥ ìµœê·¼ì— ì…ì‚¬í•œ ì‚¬ì›ì˜ ì…ì‚¬ë‚ ì§œ(ì‹ ì…ì‚¬ì›) ì¡°íšŒ
+select max(hire_date) from employees;
+-- ê°€ì ì˜¤ë˜ì „ì— ì…ì‚¬í•œ ì‚¬ì›ì˜ ì…ì‚¬ë‚ ì§œ(ì™•ê³ ì°¸) ì¡°íšŒ
+select min(hire_date) from employees;
+select max(hire_date) as "ì‹ ì…ì‚¬ì›", min(hire_date) "ê³ ì°¸ì‚¬ì›", trunc((max(hire_date)-min(hire_date))/365) from employees;
+-- ì§‘ê³„í•¨ìˆ˜ë¼ë¦¬ ê°™ì´ ì‚¬ìš© ê°€ëŠ¥
+
+-- ì§‘ê³„í•©ìˆ˜ëŠ” whereì ˆì— ì‚¬ìš© ë¶ˆê°€
+select employee_id, first_name from employees where salary = max(salary); -- ì—ëŸ¬ë°œìƒ
+
+-- ìˆ«ì í•¨ìˆ˜: abs()-ì ˆëŒ€ê°’, round()-ë°˜ì˜¬ë¦¼, trunc()-ì ˆì‚­
+select -23, 23 from dual;
+select sign(-23), sign(23), 0 from dual; -- sign(ê°’) í•¨ìˆ˜ = ì–‘ìˆ˜:1, ìŒìˆ˜:-1, -:0
+select round(0.153), round(0.543) from dual;
+select round(0.153, 1), round(0.543, 1) from dual;
+select round(0.12345678, 0), round(2.3423455, 4) from dual;
+
+-- trunc() í•¨ìˆ˜: ì ˆì‚­ -0ì€ ì†Œìˆ˜ì ì„ ì ˆì‚­, ì–‘ìˆ˜ëŠ” ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™í•˜ì—¬ ì ˆì‚­, ìŒìˆ˜ëŠ” ì™¼ìª½ìœ¼ë¡œ ì´ë™í•´ì„œ ì ˆì‚­
+select trunc(1234.9234567, 0), trunc(1234.9234567, 1), round(1234.9234567, -1) from dual;
+select trunc(1234.9234567), trunc(1234.9234567, 2), round(1234.9234567, -2) from dual;
+
+-- ceil: ì†Œìˆ˜ì  ë¬´ì¡°ê±´ ì˜¬ë¦¼
+select ceil(32.8), ceil(32.3), ceil(-32.3) from dual;
+
+-- floor(): ì†Œìˆ˜ì  ë¬´ì¡°ê±´ ë‚´ë¦¼
+select floor(32.0), floor(32.3), floor(-32.3) from dual;
+
+-- power(): ì œê³± ì—°ì‚° í•¨ìˆ˜
+select power(4, 2) from dual;
+
+-- mod(): ë‚˜ë¨¸ì§€ êµ¬í•˜ëŠ” í•¨ìˆ˜
+select mod(7, 4) from dual;
+select 1+1, 2*2 from dual;
+
+-- sqrt(): ì œê³±ê·¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
+select sqrt(4), sqrt(3), sqrt(2) from dual;
+
+-- ë¬¸ìì—´ í•¨ìˆ˜
+-- concat(): ë¬¸ìì—´ì„ ì—°ê²°í•´ì£¼ëŠ” í•¨ìˆ˜ ||(or)ì™€ ê°™ìŒ
+-- concat: ë‘ê°œë§Œ ê¸€ìë¥¼ ì—°ê²°í•´ì¤Œ/ ||: ë‘ê°œ ì´ìƒì˜ ì—¬ëŸ¬ê°œ  ì—°ê²° ê°€ëŠ¥
+select concat('Hello', 'Bye') from dual;
+select concat('Hello', 'Bye'), 'Good'||'Bad'||'Nice' from dual;
+
+-- initCap(): ë‹¨ì–´ì˜ ì²«ê¸€ìë¥¼ ëŒ€ë¶„ìë¡œ ë°”ê¿ˆ
+select initcap('good morning') from dual;
+select initcap('good/bad morning') from dual; -- ê³µë°± ë° íŠ¹ìˆ˜ê¸°í˜¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‹¨ì–´ì˜ ì²«ê¸€ìë¥¼ ëŒ€ë¶„ìë¡œ ë°”ê¿ˆ
+
+-- lower(ë¬¸ìì—´): ì†Œë¬¸ìë¡œ ë³€í™˜í•˜ì—¬ ì¶œë ¥
+-- upper(ë¬¸ìì—´): ëŒ€ë¬¸ìë¡œ ë³€í™˜í•˜ì•„ã…• ì¶œë ¥
+select lower('Good') from dual;
+select upper('Good') from dual;
+
+-- lpad()
+select lpad('good', 10) from dual; --ì „ì²´ 10ìë¦¬ í• ë‹¹ í›„ ì™¼ìª¾ ë“¤ì—¬ì“°ê¸°
+select lpad('good', 10, '*') from dual;  -- ì „ì²´ 10ìë¦¬ í• ë‹¹ í›„ ì§€ì •ëœ ë¬¸ìì—´ ì¶œë ¥ 
+select lpad('good', 10, 'L') from dual;  -- ì „ì²´ 10ìë¦¬ í• ë‹¹ í›„ ì§€ì •ëœ ë¬¸ìì—´ ì¶œë ¥ 
+
+-- rpad()
+select 'good' from dual;
+select rpad('good', 10) from dual;
+select rpad('good', 10, '*') from dual;
+select rpad('good', 10, 'M') from dual;
+select rpad('í™ê¸¸ë™', 10, '*') from dual; -- í•œê¸€ì€ í•œ ê¸€ìê°€ 2byteë¡œ ì²˜ë¦¬
+
+-- ltreim(), rtrim(): ã„±ã…‡ë°±ì„ ì œê±°í•˜ëŠ” í•¨ìˆ˜
+select ltrim('     good') from dual;
+select rtrim('good           ') from dual;
+
+select ltrim('goodbye', 'g'), ltrim('goodbye', 'o'), ltrim('goodbye', 'go') from dual;
+select rtrim('goodbye                 '), rtrim('goodbye', 'e') from dual;
+
+
+-- substr(): ë¶€ë¶„ ë¬¸ìì—´ì„ ë¦¬í„´í•´ì£¼ëŠ” í•¨ìˆ˜ *ìë¦¬ ì˜ë³´ê¸°
+select substr('good morning john', 8) from dual;
+select substr('good morning john', 8, 4) from dual;
+select substr('good morning john', -4) from dual;
+select substr('good morning john', -4, 2) from dual;
+
+select substr('good morning john', 8, 4), substr('êµ¿ëª¨ë‹ ì¡´', 2, 2) from dual;
+
+-- replace(): ë¬¸ìì—´ì„ êµì²´(1ì—ì„œ 2ë¥¼ 3ìœ¼ë¡œ ë°”ê¿”ë¼)
+select replace('good morning Tom', 'morning', 'evening') from dual;
+
+-- translate(): ë¬¸ìì—´ êµì²´
+select replace('You are not along', 'You', 'We') from dual;
+select translate('You are not along', 'You', 'We') from dual; -- Y->W/ o->e/ uëŠ” ì—†ì–´ì§: 1:1 ëŒ€ì‘
+
+-- length(): ë¬¸ìì—´ ê¸¸ì´ êµ¬í•˜ëŠ” í•¨ìˆ˜
+select length(' good') from dual;  
+select length(ltrim('   good   ')) from dual;
+select length(rtrim('    good    ')) from dual;
+select length(trim('  good   ')) from dual;
+
+select sysdate from dual;
+-- months_between(date1, date2) : ë‘ ì˜ì§œ ì‚¬ì´ì˜ ê°œì›”ìˆ˜ì˜ ì°¨
+
+select hire_date from employees;
+select first_name, hire_date, trunc(months_between(sysdate, hire_date)) from employees; 
+
+-- add_months(): í˜„ì¬ ë‚ ì§œì— ì§€ì •í•œ ê°œì›”ìˆ˜ë¥¼ ë”í•¨
+select sysdate, add_months(sysdate, 7) from dual;
+
+-- last_day(): í•´ë‹¹ë‹¬ì˜ ë§ˆì§€ë§‰ë‚ ì„ ì¶œë ¥
+select last_day(sysdate) from dual;
+
+-- to_char() : ì¶œë ¥ í˜•ì‹ ë³€ê²½
+select to_char(sysdate, 'yyyy/mm/dd'), to_char(sysdate, 'mm/dd/yyy') from dual;
+
+-- to_date()
+select to_date('2021/03/15', 'yyyy/mm/dd') from dual;
+select sysdate - to_date('2041/08/29', 'yyyy/mm/dd') from dual;
+
+-- nvl(): nullê°’ì„ íŠ¹ì •í•œ ê°’ìœ¼ë¡œ ì¹˜í™˜í•´ì£¼ëŠ” í•¨ìˆ˜
+select first_name, commission_pct from employees;
+select first_name, commission_pct, nvl(commission_pct, 0)+0.1 from employees;
